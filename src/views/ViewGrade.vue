@@ -37,17 +37,40 @@
         name: "ViewGrade",
         data:function () {
             return {
-                items:['One','Two','Three','Four'],
+                items:[],
                 error:"Select an option",
                 select:""
             }
         },
-        mounted(){
-            console.log('mounted view grade');
-        },
+      async mounted(){
+        console.log("viewgrade.vue MOUNTED");
+        this.$store.commit('setSpinnerFlag');
+        console.log("grade clicked");
+
+        let sendObject={
+          id:this.$store.getters.getUserId
+        };
+        //console.log(sendObject);
+        try{
+          let response=await this.axios.get(`/viewGrade/${sendObject.id}`);
+          console.log("Received data from server is: ",response.data.rows[0]);
+
+          if(response.data.rows.length!=0){
+            console.log('response data row length is not zero');
+            response.data.rows.forEach(row => this.items.push('20'+row["TERM_ID"].slice(0,3)+'20'+row["TERM_ID"].slice(3,)));
+            console.log(this.items);
+          }else{
+            console.log('Wrong Information');
+          }
+        }catch(e){
+
+        }finally{
+          this.$store.commit('unsetSpinnerFlag');
+        }
+      },
         methods:{
             showGrade(){
-                this.$router.push('/showGrade')
+                this.$router.push({name: 'ShowGrade', params: {academic_term: this.select}});
             }
         }
     }

@@ -1,35 +1,35 @@
 <template>
   <v-card
-          class="mx-auto"
-          max-width="1000"
-          max-height="700"
+      class="mx-auto"
+      max-width="1000"
+      max-height="700"
   >
     <v-card-text class="black--text font-weight-bold text-center">
-      <div>level 1, Term 1, Session 2017-2018</div>
+      <div>level {{this.$route.params.academic_term.slice(10,11)}}  Term {{this.$route.params.academic_term.slice(12,13)}}  Session {{this.$route.params.academic_term.slice(0,9)}}</div>
       <div>
-        Department of Computer Science and Engineering
+        {{this.$store.getters.getDept}}
       </div>
-      <div>Name : Sumaiya Azad</div>
-      <div>StudentId : 1705048</div>
+      <div>Name : {{this.$store.getters.getUserName}}</div>
+      <div>StudentId : {{this.$store.getters.getUserId}}</div>
     </v-card-text>
     <v-card-actions class="justify-center">
       <v-simple-table
-              height="420px"
+          height="430px"
+          fixed-header
       >
         <template v-slot:default>
-
-          <thead class="teal" >
+          <thead>
           <tr>
-            <th v-for="item in headers" class="white--text">{{item}}</th>
+            <th v-for="item in headers" class="teal white--text" >{{ item }}</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="item in course" :key="item.id">
-            <td>{{ item.id }}</td>
-            <td>{{ item.title }}</td>
-            <td>{{ item.credithr }}</td>
-            <td>{{item.grade}}</td>
-            <td>{{item.grade_point}}</td>
+            <td>{{ item.COURSE_ID }}</td>
+            <td>{{ item.COURSE_TITLE }}</td>
+            <td>{{ item.CREDIT_HOUR }}</td>
+            <td>{{ item.OBTAINED_GRADE }}</td>
+            <td>{{ item.OBTAINED_GRADE_POINT }}</td>
           </tr>
           </tbody>
         </template>
@@ -63,31 +63,48 @@
           <td></td>
         </tr>
       </v-simple-table>
-    </v-card-actions>
-  </v-card>
-</template>
+                </v-card-actions>
+              </v-card>
+            </template>
 
-<script>
-    export default {
-        name: "Registration",
-        data: function () {
-          return {
-            headers: ["COURSE_ID", "TITLE", "CREDIT_HOUR", "GRADE","GRADE_POINT"],
-            course: [{id: "CSE300", title: "Technical Writing and Presentation", credithr: "0.75",grade:"A+",grade_point:"4.00"},
-              {id: "CSE305", title: "Computer Architecture", credithr: "3.00",grade:"A+",grade_point:"4.00"},
-              {id: "CSE306", title: "Computer Architecture Sessional", credithr: "0.75",grade:"A+",grade_point:"4.00"},
-              {id: "CSE307", title: "Software Engineering", credithr: "3.00",grade:"A+",grade_point:"4.00"},
-              {id: "CSE308", title: "Compiler", credithr: "0.75",grade:"A+",grade_point:"4.00"},
-              {id: "CSE309", title: "Compiler Sessional", credithr: "3.00",grade:"A+",grade_point:"4.00"},
-              {id: "CSE310", title: "Data Communication", credithr: "0.75",grade:"A+",grade_point:"4.00"},
-              {id: "CSE311", title: "Microprocessors, Microcontrollers and Embedded Systems", credithr: "3.00",grade:"A+",grade_point:"4.00"},
-              {id: "CSE315",title: "Microprocessors, Microcontrollers and Embedded Systems Sessional",credithr: "3.00",grade:"A+",grade_point:"4.00"}
-            ]
-          }
-        }
-    }
-</script>
+            <script>
+            export default {
+              name: "Registration",
+              data: function () {
+                return {
+                  headers: ["COURSE_ID", "TITLE", "CREDIT_HOUR", "GRADE", "GRADE_POINT"],
+                  course: []
+                }
+              },
+              async mounted() {
+                console.log(this.$route.params.academic_term);
+                console.log("showgrade.vue MOUNTED");
+                this.$store.commit('setSpinnerFlag');
 
-<style scoped>
+                let sendObject={
+                  id:this.$store.getters.getUserId,
+                  term_id:this.$route.params.academic_term.slice(2,5)+this.$route.params.academic_term.slice(7,)
+                };
+                console.log(sendObject);
+                try{
+                  let response=await this.axios.get('/showGrade',{params:sendObject});
+                  console.log("Received data from server is: ",response.data.rows);
 
-</style>
+                  if(response.data.rows.length!=0){
+                    console.log('response data row length is not zero');
+                    response.data.rows.forEach(row => this.course.push(row));
+                  }else{
+                    console.log('Wrong Information');
+                  }
+                }catch(e){
+
+                }finally{
+                  this.$store.commit('unsetSpinnerFlag');
+                }
+              }
+            }
+            </script>
+
+            <style scoped>
+
+            </style>

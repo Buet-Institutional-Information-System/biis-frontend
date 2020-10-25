@@ -47,7 +47,7 @@
                 console.log("Received data from server is: ");
                 console.log(response.data.rows[0]);
                 if (response.data.rows.length != 0) {
-                    this.adviserName = response.data.rows[0].NAME;
+                    this.adviserName = response.data.rows[0].INS_NAME;
                     this.adviserDept = response.data.rows[0].DEPT;
                     this.adviserDesignation = response.data.rows[0].DESIGNATION;
                 } else {

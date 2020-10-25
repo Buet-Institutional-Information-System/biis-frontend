@@ -84,7 +84,7 @@
                     console.log(response.data.rows[0]);
                     if (response.data.rows.length != 0) {
 
-                        let password = response.data.rows[0].USERPASSWORD;
+                        let password = response.data.rows[0].PSSWRD;
                         this.$store.commit('setUserPassword', password);
                         console.log(" userPassword: ", this.$store.getters.getUserPassword);
                         this.$router.push('/home');

@@ -5,28 +5,28 @@
     >
         <v-card-text class="black--text font-weight-bold text-center">
           <div>OFFERED COURSES</div>
-            <div>level 1, Term 1, Session 2017-2018</div>
+            <div>level {{this.$store.getters.getCurrentLevel}}  Term {{this.$store.getters.getCurrentTerm}}  Session {{this.$store.getters.getCurrentSession}}</div>
             <div>
-                Department of Computer Science and Engineering
+                {{this.$store.getters.getDept}}
             </div>
         </v-card-text>
         <v-card-actions class="justify-center">
-            <v-simple-table  height="480"
+            <v-simple-table  height="480" fixed-header
             >
                 <template v-slot:default>
 
-                    <thead class="teal" >
+                    <thead >
                     <tr>
-                        <th v-for="item in headers" class="white--text">{{item}}</th>
+                        <th v-for="item in headers" class="teal white--text">{{item}}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="item in course" :key="item.id">
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.title }}</td>
-                        <td>{{ item.credithr }}</td>
+                        <td>{{ item.COURSE_ID }}</td>
+                        <td>{{ item.COURSE_TITLE }}</td>
+                        <td>{{ item.CREDIT_HOUR }}</td>
                         <td>
-                            <v-checkbox dense color="teal"></v-checkbox>
+                            <v-checkbox dense color="teal" v-model="item.select"></v-checkbox>
                         </td>
                     </tr>
                     </tbody>
@@ -65,21 +65,62 @@
         data: function () {
             return {
                 headers: ["COURSE_ID", "TITLE", "CREDIT_HOUR","SELECT"],
-                course: [{id: "CSE300", title: "Technical Writing and Presentation", credithr: "0.75"},
-                    {id: "CSE305", title: "Computer Architecture", credithr: "3.00"},
-                    {id: "CSE306", title: "Computer Architecture Sessional", credithr: "0.75"},
-                    {id: "CSE307", title: "Software Engineering", credithr: "3.00"},
-                    {id: "CSE308", title: "Compiler", credithr: "0.75"},
-                    {id: "CSE309", title: "Compiler Sessional", credithr: "3.00"},
-                    {id: "CSE310", title: "Data Communication", credithr: "0.75"},
-                    {id: "CSE311", title: "Microprocessors, Microcontrollers and Embedded Systems", credithr: "3.00"},
-                    {id: "CSE315",title: "Microprocessors, Microcontrollers and Embedded Systems Sessional",credithr: "3.00"}
-                ]
+                course: []
             }
         },
+      async mounted(){
+        console.log("registration.vue MOUNTED");
+        this.$store.commit('setSpinnerFlag');
+        let sendObject={
+          id:this.$store.getters.getUserId,
+          term_id:this.$store.getters.getUserTerm,
+          available_dept:this.$store.getters.getUserDeptId
+        };
+        console.log(sendObject);
+        try{
+          let response=await this.axios.get('/registration',{params:sendObject});
+          console.log("Received data from server is: ",response.data.rows);
+          console.log(response.data.registration);
+          if(response.data.registration && response.data.rows.length!==0){
+            response.data.rows.forEach(row => row['select']=false);
+            response.data.rows.forEach(row => this.course.push(row));
+            console.log(this.course[0]);
+          }else if(!response.data.registration && response.data.rows.length!==0){
+              this.$router.push('/registrationApproval');
+          } else {
+            console.log('Wrong Information');
+          }
+        }catch(e){
+
+        }finally{
+          this.$store.commit('unsetSpinnerFlag');
+        }
+      },
         methods: {
-            approvalClicked() {
+            async approvalClicked() {
+                console.log(this.course);
+              this.$store.commit('setSpinnerFlag');
+              let sendObject={
+                id:this.$store.getters.getUserId,
+                term_id:this.$store.getters.getUserTerm,
+                course_id:[]
+              };
+              this.course.forEach(c => {
+                if (c['select']===true){
+                  sendObject.course_id.push(c['COURSE_ID']);
+                }
+              });
+              console.log(sendObject);
+              try{
+                let response=await this.axios.post('/insertRegistration',sendObject);
+
+                console.log("Response Status ",response.status);
                 this.$router.push('/registrationApproval');
+              }catch(e){
+
+              }finally {
+                this.$store.commit('unsetSpinnerFlag');
+              }
             }
         }
     }

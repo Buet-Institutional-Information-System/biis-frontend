@@ -73,6 +73,7 @@ Vue.use(VueRouter)
     {
       path:'/showGrade',
       name:'ShowGrade',
+      props: true,
       component:ShowGrade
     },
 ]

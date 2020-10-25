@@ -70,10 +70,12 @@
             async signInClicked() {
                 this.$store.commit('setSpinnerFlag');
                 console.log("Sign In clicked");
+
                 let sendObject = {
                     id: this.id,
                     password: this.password
                 };
+
                 //console.log(sendObject);
                 try {
                     let response = await this.axios.post('/signIn', sendObject);
@@ -82,17 +84,18 @@
                     if (response.data.rows.length != 0) {
 
                         let payload = {
-                            id: response.data.rows[0].USERID,
-                            password: response.data.rows[0].USERPASSWORD,
-                            name: response.data.rows[0].USERNAME,
-                            level: response.data.rows[0].USERLEVEL,
-                            term: response.data.rows[0].USERTERM,
-                            session: response.data.rows[0].USERSESSION,
-                            bankAccount: response.data.rows[0].BANKACCOUNT,
-                            hallName: response.data.rows[0].HALLNAME,
-                            hallStatus: response.data.rows[0].HALLSTATUS,
-                            dept: response.data.rows[0].DEPT,
-                            adviserId: response.data.rows[0].ADVISER_ID
+                            id: response.data.rows[0].STUDENT_ID,
+                            password: response.data.rows[0].PSSWRD,
+                            term_id: response.data.rows[0].TERM_ID,
+                            dept_id: response.data.rows[0].DEPT_ID,
+                            name: response.data.rows[0].STUDENT_NAME,
+                            level: response.data.rows[0].LVL,
+                            term: response.data.rows[0].TRM,
+                            session: response.data.rows[0].SSSN,
+                            hallName: response.data.rows[0].HALL_NAME,
+                            hallStatus: response.data.rows[0].HALL_STATUS,
+                            dept: response.data.rows[0].DEPT_NAME,
+                            adviserId: response.data.rows[0].INS_ID
                         };
                         console.log(payload);
                         console.log("Inside if");

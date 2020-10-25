@@ -7,6 +7,8 @@ export default new Vuex.Store({
   state: {
     flagSignIn:false,
     userId:"",
+    termId:"",
+    deptId:"",
     userName:"",
     userPassword:"",
     dept: "",
@@ -15,7 +17,8 @@ export default new Vuex.Store({
     currentSession:"",
     hallName:"",
     hallStatus:"",
-    bankAccountNo:"",
+    contact_person_name:"",
+    contact_person_number:"",
     adviserId:"",
     adviserName:"",
     adviserDesignation: "",
@@ -23,6 +26,7 @@ export default new Vuex.Store({
     email:"",
     address:"",
     spinnerFlag:false,
+    registration:false
   },
   getters: {
     getFlagSignIn: state =>{
@@ -30,6 +34,12 @@ export default new Vuex.Store({
     },
     getUserId:state=>{
       return  state.userId;
+    },
+    getUserTerm:state=>{
+      return  state.termId;
+    },
+    getUserDeptId:state=>{
+      return  state.deptId;
     },
     getUserName:state=>{
       return state.userName;
@@ -53,7 +63,7 @@ export default new Vuex.Store({
       return state.currentTerm;
     },
     getCurrentSession:state=>{
-      return state.currentSession+"-"+(state.currentSession+1);
+      return state.currentSession;
     },
     getHallName:state=>{
       return state.hallName;
@@ -70,8 +80,11 @@ export default new Vuex.Store({
     getPhone:state=>{
       return state.phone;
     },
-    getEmail:state=>{
-      return state.email;
+    getContactPersonName:state=>{
+      return state.contact_person_name;
+    },
+    getContactPersonNumber:state=>{
+      return state.contact_person_number;
     },
     getAddress:state=>{
       return state.address;
@@ -90,12 +103,13 @@ export default new Vuex.Store({
     setUser(state,payload){
       state.flagSignIn=true;
       state.userId=payload.id;
+      state.termId=payload.term_id;
+      state.deptId=payload.dept_id;
       state.userPassword=payload.password;
       state.userName=payload.name;
       state.currentLevel=payload.level;
       state.currentTerm=payload.term;
       state.currentSession=payload.session;
-      state.bankAccountNo=payload.bankAccount;
       state.hallName=payload.hallName;
       state.hallStatus=payload.hallStatus;
       state.dept=payload.dept;
@@ -121,12 +135,14 @@ export default new Vuex.Store({
     },
     setUserInfo(state,payload){
       state.phone=payload.phone;
-      state.email=payload.email;
+      state.contact_person_name=payload.contact_person_name;
+      state.contact_person_number=payload.contact_person_number;
       state.address=payload.address;
     },
     unsetUserInfo(state){
       state.phone="";
-      state.email="";
+      state.contact_person_name="";
+      state.contact_person_number="";
       state.address="";
     },
     setSpinnerFlag(state){
@@ -134,6 +150,12 @@ export default new Vuex.Store({
     },
     unsetSpinnerFlag(state){
       state.spinnerFlag=false;
+    },
+    setRegistration(state){
+      state.registration=true;
+    },
+    unsetRegistration(state){
+      state.registration=false;
     }
   },
   modules: {

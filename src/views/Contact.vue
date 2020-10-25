@@ -41,8 +41,7 @@
                 contacts:[
                     {info:'Name',value:this.$store.getters.getUserName},
                     {info:'Student Id',value:this.$store.getters.getUserId},
-                    {info:'Level/Term',value:this.$store.getters.getCurrentLevel+'/'+this.$store.getters.getCurrentTerm},
-                    {info:'BankAccount No',value:this.$store.getters.getBankAccountNo}
+                    {info:'Level/Term',value:this.$store.getters.getCurrentLevel+'/'+this.$store.getters.getCurrentTerm}
                 ],
                 edits:[]
 
@@ -64,15 +63,17 @@
                 if(response.data.rows.length!=0){
                     console.log('response data row length is not zero');
                     let payload={
-                        phone:response.data.rows[0].PHONE,
-                        email:response.data.rows[0].EMAIL,
+                        phone:response.data.rows[0].MOBILE_NUMBER,
+                        contact_person_name:response.data.rows[0].CONTACT_PERSON_NAME,
+                        contact_person_number:response.data.rows[0].CONTACT_PERSON_NUMBER,
                         address:response.data.rows[0].ADDRESS
                     };
                     this.$store.commit('unsetUserInfo');
                     this.$store.commit('setUserInfo',payload);
                     this.edits=[
                         {info:'Phone No',value:this.$store.getters.getPhone},
-                        {info:'Email Address',value:this.$store.getters.getEmail},
+                        {info:'Contact Person Name',value:this.$store.getters.getContactPersonName},
+                        {info:'Contact Person Phone',value:this.$store.getters.getContactPersonNumber},
                         {info:'Residential Area',value:this.$store.getters.getAddress}
                     ]
                 }else{

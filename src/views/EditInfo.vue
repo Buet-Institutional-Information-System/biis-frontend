@@ -25,17 +25,30 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-left subtitle-2">Phone No</td>
-                        <td class="text-left subtitle-2">
-                            <v-text-field
-                                    color="black"
-                                    clearable
-                                    dense
-                                    outlined
-                                    style="margin-top: 5%"
-                                    v-model="email"
-                            ></v-text-field>
-                        </td>
+                      <td class="text-left subtitle-2">Contact Person Name</td>
+                      <td class="text-left subtitle-2">
+                        <v-text-field
+                            color="black"
+                            clearable
+                            dense
+                            outlined
+                            style="margin-top: 5%"
+                            v-model="contact_person_name"
+                        ></v-text-field>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left subtitle-2">Contact Person Number</td>
+                      <td class="text-left subtitle-2">
+                        <v-text-field
+                            color="black"
+                            clearable
+                            dense
+                            outlined
+                            style="margin-top: 5%"
+                            v-model="contact_person_number"
+                        ></v-text-field>
+                      </td>
                     </tr>
                     <tr>
                         <td class="text-left subtitle-2">Residential Area</td>
@@ -75,11 +88,11 @@
                     {
                         info: 'Level/Term',
                         value: this.$store.getters.getCurrentLevel + '/' + this.$store.getters.getCurrentTerm
-                    },
-                    {info: 'BankAccount No', value: this.$store.getters.getBankAccountNo}
+                    }
                 ],
                 phone: this.$store.getters.getPhone,
-                email: this.$store.getters.getEmail,
+                contact_person_name: this.$store.getters.getContactPersonName,
+                contact_person_number: this.$store.getters.getContactPersonNumber,
                 address: this.$store.getters.getAddress
             }
         },
@@ -95,14 +108,16 @@
                 let sendObject = {
                     id: this.$store.getters.getUserId,
                     phone: this.phone,
-                    email: this.email,
-                    address: this.address,
+                    contact_person_name:this.contact_person_name,
+                    contact_person_number: this.contact_person_number,
+                    address: this.address
                 };
                 console.log('SEND OBJECT: ', sendObject);
                 try {
+                    console.log("inside try");
                     let response = this.axios.patch('/editInfo', sendObject);
                     console.log("Received data from /editinfo route is: ");
-                    console.log(response.data.rows[0]);
+                    console.log(response);
                 } catch (e) {
                     console.log("ERROR in /editinfo");
                     console.log(e);
