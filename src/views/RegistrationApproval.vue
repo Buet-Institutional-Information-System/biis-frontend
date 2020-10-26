@@ -6,12 +6,12 @@
   >
     <v-card-text class="black--text font-weight-bold text-center">
       <div>REGISTERED COURSES</div>
-      <div>level 1, Term 1, Session 2017-2018</div>
+      <div>level {{this.$store.getters.getCurrentLevel}}  Term {{this.$store.getters.getCurrentTerm}}  Session {{this.$store.getters.getCurrentSession}}</div>
       <div>
-        Department of Computer Science and Engineering
+        {{this.$store.getters.getDept}}
       </div>
-      <div>Name : Sumaiya Azad</div>
-      <div>StudentId : 1705048</div>
+      <div>Name : {{this.$store.getters.getUserName}}</div>
+      <div>StudentId : {{this.$store.getters.getUserId}}</div>
     </v-card-text>
     <v-card-actions class="justify-center">
       <v-simple-table
@@ -39,12 +39,12 @@
       <v-simple-table dense>
         <tr>
           <td>Registered credit hours in this term</td>
-          <td>19.5</td>
+          <td>{{registered_credit_hours_this_term}}</td>
           <td></td>
         </tr>
         <tr>
           <td>Credit hours earned upto this term</td>
-          <td>19.5</td>
+          <td>{{credit_hours_upto_this_term}}</td>
           <td></td>
         </tr>
       </v-simple-table>
@@ -59,11 +59,13 @@
         data: function () {
           return {
             headers: ["COURSE_ID", "TITLE", "CREDIT_HOUR"],
-            course: []
+            course: [],
+            credit_hours_upto_this_term:"",
+            registered_credit_hours_this_term:""
           }
         },
       async mounted(){
-        console.log("registration.vue MOUNTED");
+        console.log("registrationApproval.vue MOUNTED");
         this.$store.commit('setSpinnerFlag');
         let sendObject={
           id:this.$store.getters.getUserId,
@@ -71,8 +73,10 @@
         };
         console.log(sendObject);
         try{
-          let response=await this.axios.get('/registration',{params:sendObject});
-          console.log("Received data from server is: ",response.data.rows);
+          let response=await this.axios.get('/registrationApproval',{params:sendObject});
+          console.log("Received data from server is: ",response.data);
+          this.registered_credit_hours_this_term=response.data.registered_credit_hours;
+          this.credit_hours_upto_this_term=response.data.credit_hours_earned;
           if(response.data.rows.length!==0){
             response.data.rows.forEach(row => this.course.push(row));
           }else {

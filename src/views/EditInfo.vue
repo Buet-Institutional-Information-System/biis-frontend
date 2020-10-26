@@ -68,6 +68,10 @@
             </v-list-item-content>
         </v-list-item>
         <v-card-actions>
+          <v-btn color="teal" dark @click="backClicked">
+            <v-icon left>far fa-share-square</v-icon>
+            <span right>Back</span>
+          </v-btn>
             <v-spacer/>
             <v-btn color="teal" dark @click="confirmClicked">
                 <v-icon left>mdi-content-save-edit-outline</v-icon>
@@ -125,7 +129,10 @@
                     this.$store.commit('unsetSpinnerFlag');
                     this.$router.push('/contact');
                 }
-            }
+            },
+          backClicked(){
+            this.$router.push('/contact');
+          }
         }
     }
 </script>

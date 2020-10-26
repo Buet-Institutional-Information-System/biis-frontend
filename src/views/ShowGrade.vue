@@ -39,27 +39,27 @@
       <v-simple-table dense>
         <tr>
           <td>GPA</td>
-          <td>19.5</td>
+          <td>{{gpa}}</td>
           <td></td>
         </tr>
         <tr>
           <td>Registered credit hours in this term</td>
-          <td>19.5</td>
+          <td>{{registered_credit_hours_this_term}}</td>
           <td></td>
         </tr>
         <tr>
           <td>Credit hours earned in this term</td>
-          <td>19.5</td>
+          <td>{{earned_credit_hours_this_term}}</td>
           <td></td>
         </tr>
         <tr>
           <td>Total Credit hours</td>
-          <td>19.5</td>
+          <td>{{total_credit_hours}}</td>
           <td></td>
         </tr>
         <tr>
           <td>CGPA</td>
-          <td>19.5</td>
+          <td>{{cgpa}}</td>
           <td></td>
         </tr>
       </v-simple-table>
@@ -73,7 +73,12 @@
               data: function () {
                 return {
                   headers: ["COURSE_ID", "TITLE", "CREDIT_HOUR", "GRADE", "GRADE_POINT"],
-                  course: []
+                  course: [],
+                  registered_credit_hours_this_term:"",
+                  earned_credit_hours_this_term:"",
+                  total_credit_hours:"",
+                  gpa:"",
+                  cgpa:""
                 }
               },
               async mounted() {
@@ -89,7 +94,11 @@
                 try{
                   let response=await this.axios.get('/showGrade',{params:sendObject});
                   console.log("Received data from server is: ",response.data.rows);
-
+                  this.registered_credit_hours_this_term=response.data.registered_credit_hours;
+                  this.earned_credit_hours_this_term=response.data.earned_credit_hours;
+                  this.total_credit_hours=response.data.total_credit_hours;
+                  this.gpa=response.data.gpa.toFixed(2);
+                  this.cgpa=response.data.cgpa.toFixed(2);
                   if(response.data.rows.length!=0){
                     console.log('response data row length is not zero');
                     response.data.rows.forEach(row => this.course.push(row));

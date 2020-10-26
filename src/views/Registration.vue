@@ -37,7 +37,7 @@
             <v-simple-table dense>
                 <tr>
                     <td>Total credit hours in this term</td>
-                    <td>19.5</td>
+                    <td>{{total_credit_hour}}</td>
                     <td></td>
                 </tr>
 <!--                <tr>-->
@@ -65,6 +65,7 @@
         data: function () {
             return {
                 headers: ["COURSE_ID", "TITLE", "CREDIT_HOUR","SELECT"],
+                total_credit_hour:"",
                 course: []
             }
         },
@@ -82,10 +83,11 @@
           console.log("Received data from server is: ",response.data.rows);
           console.log(response.data.registration);
           if(response.data.registration && response.data.rows.length!==0){
+            this.total_credit_hour=response.data.total_credit_hour;
             response.data.rows.forEach(row => row['select']=false);
             response.data.rows.forEach(row => this.course.push(row));
             console.log(this.course[0]);
-          }else if(!response.data.registration && response.data.rows.length!==0){
+          }else if(!response.data.registration){
               this.$router.push('/registrationApproval');
           } else {
             console.log('Wrong Information');
