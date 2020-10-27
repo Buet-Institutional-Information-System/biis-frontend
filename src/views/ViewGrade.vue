@@ -4,12 +4,15 @@
             class="v-card--hover "
     >
         <v-card-text>
-            <v-card-title class="display-1 text--primary">
+            <v-card-title class="display-1 text--primary" v-if="show">
                 View • Grade
             </v-card-title>
-
+          <v-card-title class="display-1 text--primary" v-else>
+            No • Grade • Available
+          </v-card-title>
             <v-card-actions>
                 <v-select
+                        v-if="show"
                         v-model="select"
                         color="black"
                         item-color="teal"
@@ -24,7 +27,7 @@
         <v-card-actions>
 
                 <v-spacer />
-                <v-btn color="teal" dark @click=showGrade>
+                <v-btn color="teal" dark @click=showGrade v-if="show">
                     <v-icon left>mdi-school-outline</v-icon>
                     <span right>Show Grade</span>
                 </v-btn>
@@ -39,7 +42,8 @@
             return {
                 items:[],
                 error:"Select an option",
-                select:""
+                select:"",
+                show:true
             }
         },
       async mounted(){
@@ -60,7 +64,7 @@
             response.data.rows.forEach(row => this.items.push('20'+row["TERM_ID"].slice(0,3)+'20'+row["TERM_ID"].slice(3,)));
             console.log(this.items);
           }else{
-            console.log('Wrong Information');
+            this.show=false;
           }
         }catch(e){
 
