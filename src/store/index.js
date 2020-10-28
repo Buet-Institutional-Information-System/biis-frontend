@@ -47,12 +47,6 @@ export default new Vuex.Store({
     getUserPassword:state=>{
       return state.userPassword;
     },
-    getUserPhoneNo:state=>{
-      return state.userPhoneNo;
-    },
-    getUserEmailAddress:state=>{
-      return state.userEmailAddress;
-    },
     getDept:state=>{
       return state.dept;
     },
@@ -71,14 +65,14 @@ export default new Vuex.Store({
     getHallStatus:state=>{
       return state.hallStatus;
     },
-    getBankAccountNo:state=>{
-      return state.bankAccountNo;
-    },
     getAdviserId:state=>{
       return state.adviserId;
     },
     getPhone:state=>{
       return state.phone;
+    },
+    getEmail:state=>{
+      return state.email;
     },
     getContactPersonName:state=>{
       return state.contact_person_name;
@@ -135,12 +129,14 @@ export default new Vuex.Store({
     },
     setUserInfo(state,payload){
       state.phone=payload.phone;
+      state.email=payload.email;
       state.contact_person_name=payload.contact_person_name;
       state.contact_person_number=payload.contact_person_number;
       state.address=payload.address;
     },
     unsetUserInfo(state){
       state.phone="";
+      state.email="";
       state.contact_person_name="";
       state.contact_person_number="";
       state.address="";

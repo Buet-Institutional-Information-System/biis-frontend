@@ -7,13 +7,13 @@
             <v-list-item-content>
                 <v-simple-table >
                         <tbody>
-                        <tr v-for="item in contacts" :key="item.name">
-                            <td class="text-left subtitle-2">{{ item.info }}</td>
-                            <td class="text-left subtitle-2">{{ item.value }}</td>
+                        <tr v-for="[key,value] in Object.entries(contacts)">
+                            <td class="text-left subtitle-2">{{ key }}</td>
+                            <td class="text-left subtitle-2">{{ value }}</td>
                         </tr>
-                        <tr v-for="item in edits" :key="item.name">
-                            <td class="text-left subtitle-2">{{ item.info }}</td>
-                            <td class="text-left subtitle-2">{{ item.value }}</td>
+                        <tr v-for="[key,value] in Object.entries(edits)" >
+                            <td class="text-left subtitle-2">{{ key }}</td>
+                            <td class="text-left subtitle-2">{{ value }}</td>
                         </tr>
                         </tbody>
                 </v-simple-table>
@@ -38,11 +38,12 @@
         name: "Contact",
         data:function () {
             return {
-                contacts:[
-                    {info:'Name',value:this.$store.getters.getUserName},
-                    {info:'Student Id',value:this.$store.getters.getUserId},
-                    {info:'Level/Term',value:this.$store.getters.getCurrentLevel+'/'+this.$store.getters.getCurrentTerm}
-                ],
+              contacts:
+                  {
+                    'Name': this.$store.getters.getUserName,
+                    'Student Id': this.$store.getters.getUserId,
+                    'Level/Term': this.$store.getters.getCurrentLevel + '/' + this.$store.getters.getCurrentTerm
+                  },
                 edits:[]
 
             }
@@ -64,18 +65,20 @@
                     console.log('response data row length is not zero');
                     let payload={
                         phone:response.data.rows[0].MOBILE_NUMBER,
+                        email:response.data.rows[0].EMAIL,
                         contact_person_name:response.data.rows[0].CONTACT_PERSON_NAME,
                         contact_person_number:response.data.rows[0].CONTACT_PERSON_NUMBER,
                         address:response.data.rows[0].ADDRESS
                     };
                     this.$store.commit('unsetUserInfo');
                     this.$store.commit('setUserInfo',payload);
-                    this.edits=[
-                        {info:'Phone No',value:this.$store.getters.getPhone},
-                        {info:'Contact Person Name',value:this.$store.getters.getContactPersonName},
-                        {info:'Contact Person Phone',value:this.$store.getters.getContactPersonNumber},
-                        {info:'Residential Area',value:this.$store.getters.getAddress}
-                    ]
+                    console.log(this.$store.getters.getEmail);
+                    this.edits=
+                        {'Phone No':this.$store.getters.getPhone,
+                        'Email':this.$store.getters.getEmail,
+                        'Contact Person Name':this.$store.getters.getContactPersonName,
+                        'Contact Person Phone':this.$store.getters.getContactPersonNumber,
+                        'Residential Area':this.$store.getters.getAddress}
                 }else{
                     console.log('Wrong Information');
                 }
