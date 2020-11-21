@@ -85,7 +85,7 @@
 
                         let payload = {
                             id: response.data.rows[0].STUDENT_ID,
-                            password: response.data.rows[0].PSSWRD,
+                            password: this.password,
                             term_id: response.data.rows[0].TERM_ID,
                             dept_id: response.data.rows[0].DEPT_ID,
                             name: response.data.rows[0].STUDENT_NAME,

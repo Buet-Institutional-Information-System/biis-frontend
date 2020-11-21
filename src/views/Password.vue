@@ -66,7 +66,10 @@
             async saveClicked() {
                 console.log("Save clicked");
                 if (!(this.currentPassword === this.$store.getters.getUserPassword && this.newPassword === this.re)) {
-                    console.log("Password Type Error or Password didnt match");
+
+                      console.log("Password typeError or didnt match");
+
+
                     return;
                 }
                 console.log("Frontend matched");
