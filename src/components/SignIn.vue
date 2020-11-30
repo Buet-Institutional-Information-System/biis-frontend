@@ -78,7 +78,7 @@
 
                 //console.log(sendObject);
                 try {
-                    let response = await this.axios.post('/signIn', sendObject);
+                    let response = await this.axios.get('/signIn', {params:sendObject});
                     console.log("Received data from server is: ");
                     console.log(response.data.rows[0]);
                     if (response.data.rows.length != 0) {

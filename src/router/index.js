@@ -12,76 +12,84 @@ import ViewGrade from "../views/ViewGrade";
 import Registration from "../views/Registration";
 import RegistrationApproval from "../views/RegistrationApproval";
 import ShowGrade from "../views/ShowGrade";
+import Admin from "../views/Admin";
+
 Vue.use(VueRouter)
 
-  const routes = [
-  {
-    path: '/',
-    name: 'SignIn',
-    component: SignIn
-  },
-  {
-    path: '/adviser',
-    name: 'Adviser',
-    component: Adviser
-  },
+const routes = [
     {
-      path: '/contact',
-      name: 'Contact',
-      component:Contact
+        path: '/admin',
+        name: 'Admin',
+        component: Admin
     },
     {
-      path: '/editInfo',
-      name: 'EditInfo',
-      component:EditInfo
+        path: '/',
+        name: 'SignIn',
+        component: SignIn
     },
     {
-      path: '/feedback',
-      name: 'Feedback',
-      component: Feedback
+        path: '/adviser',
+        name: 'Adviser',
+        component: Adviser
     },
     {
-      path: '/home',
-      name: 'Home',
-      component: Home
+        path: '/contact',
+        name: 'Contact',
+        component: Contact
     },
     {
-      path: '/password',
-      name: 'Password',
-      component: Password
+        path: '/editInfo',
+        name: 'EditInfo',
+        component: EditInfo
     },
     {
-      path: '/secretQuestion',
-      name: 'SecretQuestion',
-      component: SecretQuestion
+        path: '/feedback',
+        name: 'Feedback',
+        component: Feedback
     },
     {
-      path: '/viewGrade',
-      name: 'ViewGrade',
-      component:ViewGrade
+        path: '/home',
+        name: 'Home',
+        component: Home
     },
     {
-      path:'/registration',
-      name:'Registration',
-      component:Registration
+        path: '/password',
+        name: 'Password',
+        component: Password
     },
     {
-      path:'/registrationApproval',
-      name:'RegistrationApproval',
-      component:RegistrationApproval
+        path: '/secretQuestion',
+        name: 'SecretQuestion',
+        component: SecretQuestion
     },
     {
-      path:'/showGrade',
-      name:'ShowGrade',
-      props: true,
-      component:ShowGrade
+        path: '/viewGrade',
+        name: 'ViewGrade',
+        component: ViewGrade
     },
+    {
+        path: '/registration',
+        name: 'Registration',
+        component: Registration
+    },
+    {
+        path: '/registrationApproval',
+        name: 'RegistrationApproval',
+        component: RegistrationApproval
+    },
+    {
+        path: '/showGrade',
+        name: 'ShowGrade',
+        props: true,
+        component: ShowGrade
+    },
+
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
 
 export default router

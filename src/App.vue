@@ -1,11 +1,10 @@
 <template>
   <v-app id="app">
       <Navbar />
-      <v-content v-if="$store.getters.getFlagSignIn">
-          <Sidebar/>
-          <router-view/>
-      </v-content>
-      <v-content v-else ><SignIn/></v-content>
+    <v-content >
+      <Sidebar v-if="$store.getters.getFlagSignIn"/>
+      <router-view/>
+    </v-content>
   </v-app>
 </template>
 
@@ -14,7 +13,6 @@
 
 import Navbar  from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-import SignIn from "./components/SignIn";
 
 
 export default {
@@ -27,13 +25,10 @@ export default {
  },
   components: {
       Navbar,
-      Sidebar,
-      SignIn,
+      Sidebar
 
   },
 
-  data: () => ({
-    //
-  }),
+
 };
 </script>

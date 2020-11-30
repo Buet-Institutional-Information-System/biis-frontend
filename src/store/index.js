@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios';
 
 Vue.use(Vuex)
 
@@ -84,10 +85,12 @@ export default new Vuex.Store({
       return state.address;
     },
     getUserImage:state=>{
-      return 'http://localhost:1148/student/'+state.userId+'.jpg';
+      return axios.defaults.baseURL+'/student/'+state.userId+'.jpg';
+      //return 'http://localhost:1148/student/'+state.userId+'.jpg';
     },
     getAdviserImage:state=>{
-      return 'http://localhost:1148/adviser/'+state.adviserId+'.jpg';
+      return axios.defaults.baseURL+'/adviser/'+state.adviserId+'.jpg';
+      //return 'http://localhost:1148/adviser/'+state.adviserId+'.jpg';
     },
     getSpinnerFlag:state=>{
       return state.spinnerFlag;

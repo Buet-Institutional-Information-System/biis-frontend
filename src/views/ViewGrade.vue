@@ -61,7 +61,7 @@
 
           if(response.data.rows.length!=0){
             console.log('response data row length is not zero');
-            response.data.rows.forEach(row => this.items.push('20'+row["TERM_ID"].slice(0,3)+'20'+row["TERM_ID"].slice(3,)));
+            response.data.rows.forEach(row => this.items.push('20'+row.slice(0,3)+'20'+row.slice(3,)));
             console.log(this.items);
           }else{
             this.show=false;
