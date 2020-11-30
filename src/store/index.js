@@ -11,7 +11,7 @@ export default new Vuex.Store({
     termId:"",
     deptId:"",
     userName:"",
-    userPassword:"",
+    token:"",
     dept: "",
     currentLevel:"",
     currentTerm:"",
@@ -45,8 +45,8 @@ export default new Vuex.Store({
     getUserName:state=>{
       return state.userName;
     },
-    getUserPassword:state=>{
-      return state.userPassword;
+    getToken:state=>{
+      return state.token;
     },
     getDept:state=>{
       return state.dept;
@@ -102,7 +102,7 @@ export default new Vuex.Store({
       state.userId=payload.id;
       state.termId=payload.term_id;
       state.deptId=payload.dept_id;
-      state.userPassword=payload.password;
+      state.token=payload.token;
       state.userName=payload.name;
       state.currentLevel=payload.level;
       state.currentTerm=payload.term;
@@ -116,7 +116,7 @@ export default new Vuex.Store({
     unsetUser(state){
       state.flagSignIn=false;
       state.userId="";
-      state.userPassword="";
+      state.token="";
       state.userName="";
       state.currentLevel="";
       state.currentTerm="";
@@ -126,9 +126,6 @@ export default new Vuex.Store({
       state.hallStatus="";
       state.dept="";
       state.adviserId="";
-    },
-    setUserPassword(state,password){
-      state.password=password;
     },
     setUserInfo(state,payload){
       state.phone=payload.phone;

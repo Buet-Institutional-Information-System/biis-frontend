@@ -129,7 +129,7 @@
                 this.$store.commit('setSpinnerFlag');
                 console.log("edit Info clicked");
                 let sendObject = {
-                    id: this.$store.getters.getUserId,
+                    token:this.$store.getters.getToken,
                     phone: this.edits['Phone No'],
                     email:this.edits['Email'],
                     contact_person_name:this.edits['Contact Person Name'],

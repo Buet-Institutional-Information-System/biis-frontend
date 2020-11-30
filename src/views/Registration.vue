@@ -73,7 +73,7 @@
         console.log("registration.vue MOUNTED");
         this.$store.commit('setSpinnerFlag');
         let sendObject={
-          id:this.$store.getters.getUserId,
+          token:this.$store.getters.getToken,
           term_id:this.$store.getters.getUserTerm,
           available_dept:this.$store.getters.getUserDeptId
         };
@@ -103,7 +103,7 @@
                 console.log(this.course);
               this.$store.commit('setSpinnerFlag');
               let sendObject={
-                id:this.$store.getters.getUserId,
+                token:this.$store.getters.getToken,
                 term_id:this.$store.getters.getUserTerm,
                 course_id:[]
               };

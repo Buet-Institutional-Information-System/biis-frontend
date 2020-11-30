@@ -39,11 +39,13 @@
             this.$store.commit('setSpinnerFlag');
             console.log("Adviser clicked");
             let sendObject = {
-                id: this.$store.getters.getAdviserId
+                id: this.$store.getters.getAdviserId,
+                token:this.$store.getters.getToken
             };
-            console.log(sendObject);
+            //console.log(sendObject);
             try {
-                let response = await this.axios.get(`/adviser/${sendObject.id}`);
+                // let response = await this.axios.get(`/adviser/${sendObject.id}`);
+                let response = await this.axios.get('/adviserInfo',{params:sendObject});
                 console.log("Received data from server is: ");
                 console.log(response.data.rows[0]);
                 if (response.data.rows.length != 0) {
@@ -54,7 +56,7 @@
                     console.log('Wrong Information');
                 }
             } catch (e) {
-
+                console.log(e);
             } finally {
                 this.$store.commit('unsetSpinnerFlag');
             }

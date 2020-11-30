@@ -18,7 +18,8 @@ router.beforeEach((to, from, next) => {
         console.log("In admin block");
     } else if (to.name === 'SignIn' && store.getters.getFlagSignIn === true) {
         store.commit('unsetUser');
-    } else if (to.name !== 'SignIn' && store.getters.getFlagSignIn === false) {
+
+     } else if (to.name !== 'SignIn' && store.getters.getFlagSignIn === false) {
         console.log('block');
         router.push('/');
     }

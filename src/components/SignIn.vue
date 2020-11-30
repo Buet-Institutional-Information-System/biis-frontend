@@ -78,14 +78,15 @@
 
                 //console.log(sendObject);
                 try {
-                    let response = await this.axios.get('/signIn', {params:sendObject});
+                    let response = await this.axios.post('/signIn', sendObject);
                     console.log("Received data from server is: ");
                     console.log(response.data.rows[0]);
+                    console.log("Token: ",response.data.token);
                     if (response.data.rows.length != 0) {
 
                         let payload = {
                             id: response.data.rows[0].STUDENT_ID,
-                            password: this.password,
+                            token:response.data.token,
                             term_id: response.data.rows[0].TERM_ID,
                             dept_id: response.data.rows[0].DEPT_ID,
                             name: response.data.rows[0].STUDENT_NAME,

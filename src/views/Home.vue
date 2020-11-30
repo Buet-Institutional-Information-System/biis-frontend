@@ -9,6 +9,7 @@
                 <v-list-item-content>
                     <v-list-item class="title" >{{$store.getters.getUserName}}</v-list-item>
                     <v-list-item class="subtitle-2">{{$store.getters.getDept}}</v-list-item>
+                  <v-list-item>Student Id: {{$store.getters.getUserId}}</v-list-item>
                     <v-list-item>Level: {{$store.getters.getCurrentLevel}} Term: {{$store.getters.getCurrentTerm}}</v-list-item>
                     <v-list-item>Session: {{$store.getters.getCurrentSession}}</v-list-item>
                     <v-list-item>Hall: {{$store.getters.getHallName}} ({{$store.getters.getHallStatus}})</v-list-item>

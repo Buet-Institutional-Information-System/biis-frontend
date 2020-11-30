@@ -68,7 +68,7 @@
         console.log("registrationApproval.vue MOUNTED");
         this.$store.commit('setSpinnerFlag');
         let sendObject={
-          id:this.$store.getters.getUserId,
+          token:this.$store.getters.getToken,
           term_id:this.$store.getters.getUserTerm
         };
         console.log(sendObject);

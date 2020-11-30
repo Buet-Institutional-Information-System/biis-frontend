@@ -87,7 +87,7 @@
                 this.$store.commit('setSpinnerFlag');
 
                 let sendObject={
-                  id:this.$store.getters.getUserId,
+                  token:this.$store.getters.getToken,
                   term_id:this.$route.params.academic_term.slice(2,5)+this.$route.params.academic_term.slice(7,)
                 };
                 console.log(sendObject);

@@ -54,11 +54,11 @@
             console.log("contact Info clicked");
 
             let sendObject={
-                id:this.$store.getters.getUserId
+                token:this.$store.getters.getToken
             };
             //console.log(sendObject);
             try{
-                let response=await this.axios.get(`/contactInfo/${sendObject.id}`);
+                let response=await this.axios.get('/contactInfo',{params:sendObject});
                 console.log("Received data from server is: ",response.data.rows[0]);
 
                 if(response.data.rows.length!=0){
