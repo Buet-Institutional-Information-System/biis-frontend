@@ -62,17 +62,17 @@
                     ></v-select>
                   </v-col>
                   <v-col cols="12" md="6">
-<!--                    <v-text-field-->
-<!--                        v-model="term"-->
-<!--                        label="Current Academic Terms"-->
-<!--                        color="teal"-->
-<!--                    ></v-text-field>-->
-                    <v-select
+                    <v-text-field
                         v-model="term"
-                        :items="termList"
                         label="Current Academic Terms"
                         color="teal"
-                    ></v-select>
+                    ></v-text-field>
+<!--                    <v-select-->
+<!--                        v-model="term"-->
+<!--                        :items="termList"-->
+<!--                        label="Current Academic Terms"-->
+<!--                        color="teal"-->
+<!--                    ></v-select>-->
                   </v-col>
                 </v-row>
                 <v-row>

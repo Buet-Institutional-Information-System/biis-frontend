@@ -43,10 +43,17 @@ export default {
     }
   },
   methods: {
-    logOutClicked() {
+    async logOutClicked() {
+
+      let sendObject={
+        token:this.$store.getters.getToken
+      }
       this.$store.commit('unsetUser');
-      this.$store.commit('unsetUserInfo')
-      this.$router.push('/');
+      this.$store.commit('unsetUserInfo');
+      localStorage.removeItem("token");
+      await this.$router.push('/');
+      await this.axios.post('/logOut',sendObject);
+      console.log("after logOut");
     }
   }
 }
