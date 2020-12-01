@@ -37,12 +37,14 @@
         },
         async mounted() {
             this.$store.commit('setSpinnerFlag');
+
+            console.log("TOKEN IN ADVISER:",this.$store.getters.getToken);
             console.log("Adviser clicked");
             let sendObject = {
                 id: this.$store.getters.getAdviserId,
                 token:this.$store.getters.getToken
             };
-            //console.log(sendObject);
+            console.log(sendObject);
             try {
                 // let response = await this.axios.get(`/adviser/${sendObject.id}`);
                 let response = await this.axios.get('/adviserInfo',{params:sendObject});

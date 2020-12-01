@@ -42,7 +42,7 @@
             return {
                 items:[],
                 error:"Select an option",
-                select:"",
+                select:null,
                 show:true
             }
         },
@@ -74,7 +74,10 @@
       },
         methods:{
             showGrade(){
-                this.$router.push({name: 'ShowGrade', params: {academic_term: this.select}});
+                if(this.select !== null){
+                    this.$router.push({name: 'ShowGrade', params: {academic_term: this.select}});
+                }
+
             }
         }
     }

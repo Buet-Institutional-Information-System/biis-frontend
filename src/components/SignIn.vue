@@ -58,8 +58,9 @@
 export default {
     name: "SignIn",
     async mounted() {
-
-
+        if(this.$store.getters.getFlagSignIn){
+            this.$router.push('/home');
+        }
 
     },
     data: function () {
@@ -101,11 +102,12 @@ export default {
                         dept: response.data.rows[0].DEPT_NAME,
                         adviserId: response.data.rows[0].INS_ID
                     };
-                    localStorage.setItem("token", this.$store.getters.getToken);
+
                     console.log(payload);
                     console.log("Inside if");
                     this.$store.commit('setUser', payload);
                     console.log("Sign in flag in store: ", this.$store.getters.getFlagSignIn, ", userId: ", this.$store.getters.getUserId, ", userPassword: ", this.$store.getters.getUserPassword);
+                    localStorage.setItem("token", this.$store.getters.getToken);
                     this.$router.push('/home');
                 } else {
                     console.log('Wrong Information');

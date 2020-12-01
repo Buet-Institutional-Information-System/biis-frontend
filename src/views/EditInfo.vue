@@ -113,15 +113,48 @@
             return {
                 contacts:
                     {
-                      'Name': this.$store.getters.getUserName,
-                      'Student Id': this.$store.getters.getUserId,
-                      'Level/Term': this.$store.getters.getCurrentLevel + '/' + this.$store.getters.getCurrentTerm
+                        'Name': this.$store.getters.getUserName,
+                        'Student Id': this.$store.getters.getUserId,
+                        'Level/Term': this.$store.getters.getCurrentLevel + '/' + this.$store.getters.getCurrentTerm
                     },
-                edits:{'Phone No':this.$store.getters.getPhone,
-                  'Email':this.$store.getters.getEmail,
-                  'Contact Person Name':this.$store.getters.getContactPersonName,
-                  'Contact Person Phone':this.$store.getters.getContactPersonNumber,
-                  'Residential Area':this.$store.getters.getAddress}
+                edits: [],
+            }
+        },
+        async mounted() {
+            let sendObject = {
+                token: this.$store.getters.getToken
+            };
+            try {
+                let response = await this.axios.get('/contactInfo', {params: sendObject});
+                console.log("Received data from server is: ", response.data.rows[0]);
+
+                if (response.data.rows.length != 0) {
+                    console.log('response data row length is not zero');
+                    let payload = {
+                        phone: response.data.rows[0].MOBILE_NUMBER,
+                        email: response.data.rows[0].EMAIL,
+                        contact_person_name: response.data.rows[0].CONTACT_PERSON_NAME,
+                        contact_person_number: response.data.rows[0].CONTACT_PERSON_NUMBER,
+                        address: response.data.rows[0].ADDRESS
+                    };
+                    this.$store.commit('unsetUserInfo');
+                    this.$store.commit('setUserInfo', payload);
+                    console.log(this.$store.getters.getEmail);
+                    this.edits =
+                        {
+                            'Phone No': this.$store.getters.getPhone,
+                            'Email': this.$store.getters.getEmail,
+                            'Contact Person Name': this.$store.getters.getContactPersonName,
+                            'Contact Person Phone': this.$store.getters.getContactPersonNumber,
+                            'Residential Area': this.$store.getters.getAddress
+                        }
+                } else {
+                    console.log('Wrong Information');
+                }
+            } catch (e) {
+
+            } finally {
+                this.$store.commit('unsetSpinnerFlag');
             }
         },
         methods: {
@@ -129,17 +162,17 @@
                 this.$store.commit('setSpinnerFlag');
                 console.log("edit Info clicked");
                 let sendObject = {
-                    token:this.$store.getters.getToken,
+                    token: this.$store.getters.getToken,
                     phone: this.edits['Phone No'],
-                    email:this.edits['Email'],
-                    contact_person_name:this.edits['Contact Person Name'],
+                    email: this.edits['Email'],
+                    contact_person_name: this.edits['Contact Person Name'],
                     contact_person_number: this.edits['Contact Person Phone'],
                     address: this.edits['Residential Area']
                 };
                 console.log('SEND OBJECT: ', sendObject);
                 try {
                     console.log("inside try");
-                    let response =await this.axios.patch('/editInfo', sendObject);
+                    let response = await this.axios.patch('/editInfo', sendObject);
                     console.log("Received data from /editinfo route is: ");
                     console.log(response);
                 } catch (e) {
@@ -150,30 +183,11 @@
                     this.$router.push('/contact');
                 }
             },
-          backClicked(){
-            this.$router.push('/contact');
-          }
+            backClicked() {
+                this.$router.push('/contact');
+            }
         }
     }
-    /*
-
-    person={
-    name: Taaha,
-    addess: shiddheswari
-    }
-
-    person=[{info:name, value: Taaha},{info: address, value: shiddhwarai}]
-
-     */
-
-    /*
-
-
-
-
-
-
-     */
 </script>
 
 <style scoped>

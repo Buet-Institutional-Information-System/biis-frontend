@@ -13,13 +13,11 @@ Vue.config.productionTip = false
 axios.defaults.baseURL = 'http://localhost:1148';
 
 router.beforeEach((to, from, next) => {
-    //console.log(to,from,next);
     if (to.name === 'Admin') {
         console.log("In admin block");
-    } else if (to.name === 'SignIn' && store.getters.getFlagSignIn === true) {
-        store.commit('unsetUser');
+    }
 
-     } else if (to.name !== 'SignIn' && store.getters.getFlagSignIn === false) {
+    else if (to.name !== 'SignIn' && store.getters.getFlagSignIn === false && localStorage.getItem('token')===null) {
         console.log('block');
         router.push('/');
     }

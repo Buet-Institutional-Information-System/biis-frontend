@@ -127,6 +127,9 @@ export default new Vuex.Store({
       state.dept="";
       state.adviserId="";
     },
+    setToken(state,token){
+      state.token=token;
+    },
     setUserInfo(state,payload){
       state.phone=payload.phone;
       state.email=payload.email;
