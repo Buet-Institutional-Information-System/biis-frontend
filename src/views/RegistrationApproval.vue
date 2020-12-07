@@ -77,6 +77,12 @@
           console.log("Received data from server is: ",response.data);
           this.registered_credit_hours_this_term=response.data.registered_credit_hours;
           this.credit_hours_upto_this_term=response.data.credit_hours_earned;
+          if(this.registered_credit_hours_this_term===null){
+              this.registered_credit_hours_this_term=0;
+          }
+          if(this.credit_hours_upto_this_term===null){
+                this.credit_hours_upto_this_term=0;
+          }
           if(response.data.rows.length!==0){
             response.data.rows.forEach(row => this.course.push(row));
           }else {

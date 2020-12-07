@@ -137,6 +137,12 @@ export default new Vuex.Store({
       state.contact_person_number=payload.contact_person_number;
       state.address=payload.address;
     },
+    setFlagSignIn(state){
+      state.flagSignIn=true;
+    },
+    unsetFlagSignIn(state){
+      state.flagSignIn=false;
+    },
     unsetUserInfo(state){
       state.phone="";
       state.email="";

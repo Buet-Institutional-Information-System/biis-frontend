@@ -60,14 +60,14 @@
           console.log("Received data from server is: ",response.data.rows[0]);
 
           if(response.data.rows.length!=0){
-            console.log('response data row length is not zero');
+            console.log('response data row length is not zero',response.data.rows);
             response.data.rows.forEach(row => this.items.push('20'+row.slice(0,3)+'20'+row.slice(3,)));
-            console.log(this.items);
+            console.log('this.items: ',this.items);
           }else{
             this.show=false;
           }
         }catch(e){
-
+            console.log("error view grade ",e);
         }finally{
           this.$store.commit('unsetSpinnerFlag');
         }

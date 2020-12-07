@@ -136,10 +136,17 @@
                                     label="Grade"
                                     color="teal"
                                 ></v-text-field>
+                                <v-card-actions>
                                 <v-btn color="teal" dark @click="updateGrade">
                                     <v-icon left>mdi-update</v-icon>
                                     <span right>Update Grade</span>
                                 </v-btn>
+                                <v-spacer/>
+                                <v-btn color="teal" dark @click="publish">
+                                    <v-icon left>far fa-share-square</v-icon>
+                                    <span right>Publish</span>
+                                </v-btn>
+                                </v-card-actions>
                             </v-form>
                             <v-form v-if="item.text==='Delete'" style="margin-left: 5%;margin-right: 5%">
                                 <v-text-field
@@ -318,7 +325,9 @@ export default {
     }),
     async mounted() {
         this.$store.commit('setSpinnerFlag');
+        this.$store.commit('unsetFlagSignIn');
         console.log('admin mounted');
+
         try {
             let response = await this.axios.get('/admin/depts');
             let response2 = await this.axios.get('/admin/engDepts');
@@ -399,6 +408,17 @@ export default {
                 this.$store.commit('unsetSpinnerFlag');
             }
         },
+        async publish(){
+            this.$store.commit('setSpinnerFlag');
+            try{
+                let response = await this.axios.patch('/admin/updatePublish');
+                console.log(response);
+            }catch(e){
+                console.log(e);
+            }finally {
+                this.$store.commit('unsetSpinnerFlag');
+            }
+        },
         async deleteStudent() {
             this.$store.commit('setSpinnerFlag');
             let sendObject = {
@@ -428,6 +448,10 @@ export default {
             for(let item in sendObject){
                 formData.append(item,sendObject[item]);
             }
+            console.log(formData.get('id'));
+            console.log(formData.get('name'));
+            console.log(formData.get('dept'));
+            console.log(formData.get('designation'));
             try {
                 let response = await this.axios.post('/admin/teacher', formData);
                 this.insId = "";
