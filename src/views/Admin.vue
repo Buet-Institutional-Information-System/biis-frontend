@@ -358,7 +358,7 @@ export default {
                 id: this.studentId,
                 name: this.studentName,
                 dept: this.dept,
-                term: this.term,
+                term_id: this.term,
                 ins: this.adviserId,
                 hall: this.hall,
                 hallStatus: this.hallStatus,
