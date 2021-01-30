@@ -1,26 +1,22 @@
 <template>
-    <v-card style="margin-left: 20%;margin-top: 2%; height: 50%; width: 50%" class="v-card--hover ">
-        <v-card-text>
+    <Card>
+        <template #cardText>
             <v-card-title class="display-1 text--primary" v-if="show">
                 View • Grade
             </v-card-title>
             <v-card-title class="display-1 text--primary" v-else>
                 No • Grade • Available
             </v-card-title>
-            <v-card-actions>
-                <v-select v-if="show" v-model="select" color="black" item-color="teal" :items="items"
-                          label="Select Level/Term" outlined rounded required>
+            <v-card-actions style="padding-top: 5%">
+                <v-select v-if="show" v-model="select" color="black" item-color="teal" :items="items" label="Select Level/Term" outlined rounded required>
                 </v-select>
             </v-card-actions>
-        </v-card-text>
-        <v-card-actions>
+        </template>
+        <template #cardAction>
             <v-spacer/>
-            <v-btn color="teal" dark @click=showGrade v-if="show">
-                <v-icon left>mdi-school-outline</v-icon>
-                <span right>Show Grade</span>
-            </v-btn>
-        </v-card-actions>
-    </v-card>
+            <Button icon="mdi-school-outline" text="Show Grade" :click="showGrade" v-if="show" style="margin-right: 40%;"></Button>
+        </template>
+    </Card>
 </template>
 <script>
 export default {

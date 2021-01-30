@@ -1,19 +1,17 @@
 <template>
-    <v-card class="mx-auto" max-width="1000" max-height="700" v-if="this.$route.params.academic_term">
-        <v-card-text class="black--text font-weight-bold text-center">
-            <div>level {{ this.$route.params.academic_term.slice(10, 11) }} Term
-                {{ this.$route.params.academic_term.slice(12, 13) }} Session
-                {{ this.$route.params.academic_term.slice(0, 9) }}
+    <RegistrationCard>
+    <template #intro v-if="this.$route.params.academic_term">
+            <div>level {{ $route.params.academic_term.slice(10, 11) }} Term
+                {{ $route.params.academic_term.slice(12, 13) }} Session
+                {{ $route.params.academic_term.slice(0, 9) }}
             </div>
             <div>
-                {{ this.$store.getters.getDept }}
+                {{$store.getters.getDept }}
             </div>
-            <div>Name : {{ this.$store.getters.getUserName }}</div>
-            <div>StudentId : {{ this.$store.getters.getUserId }}</div>
-        </v-card-text>
-        <v-card-actions class="justify-center">
-            <v-simple-table height="430px" fixed-header>
-                <template v-slot:default>
+            <div>Name : {{$store.getters.getUserName }}</div>
+            <div>StudentId : {{$store.getters.getUserId }}</div>
+        </template>
+        <template #description>
                     <thead>
                     <tr>
                         <th v-for="item in headers" class="teal white--text">{{ item }}</th>
@@ -29,10 +27,7 @@
                     </tr>
                     </tbody>
                 </template>
-            </v-simple-table>
-        </v-card-actions>
-        <v-card-actions class="font-weight-medium justify-center">
-            <v-simple-table dense>
+        <template #final>
                 <tr>
                     <td>GPA</td>
                     <td>{{ gpa }}</td>
@@ -58,9 +53,10 @@
                     <td>{{ cgpa }}</td>
                     <td></td>
                 </tr>
-            </v-simple-table>
-        </v-card-actions>
-    </v-card>
+        </template>
+    <template #default>
+    </template>
+    </RegistrationCard>
 </template>
 
 <script>

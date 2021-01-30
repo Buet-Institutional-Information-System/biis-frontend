@@ -16,15 +16,9 @@
             </tbody>
         </template>
         <template #cardAction>
-            <v-btn color="teal" dark @click="backClicked">
-                <v-icon left>far fa-share-square</v-icon>
-                <span right>Back</span>
-            </v-btn>
+            <Button icon="far fa-share-square" text="Back" :click="backClicked"></Button>
             <v-spacer/>
-            <v-btn color="teal" dark @click="confirmClicked">
-                <v-icon left>mdi-content-save-edit-outline</v-icon>
-                <span right>Confirm</span>
-            </v-btn>
+            <Button icon="mdi-content-save-edit-outline" text="Confirm" :click="confirmClicked"></Button>
         </template>
     </InfoCard>
 </template>
