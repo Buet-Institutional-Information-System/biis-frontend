@@ -1,51 +1,21 @@
 <template>
-    <v-container
-
-        fluid
-        style="width:100%;height:100%;padding-top: 5%"
-
-    >
-        <v-row
-
-            justify="center"
-            style="padding-top: 0%"
-        >
-            <v-col
-                cols="12"
-                sm="8"
-                md="4"
-            >
+    <v-container fluid style="width:100%;height:100%;padding-top: 5%">
+        <v-row justify="center" style="padding-top: 0%">
+            <v-col cols="12" sm="8" md="4">
                 <v-card class="elevation-1">
-                    <v-toolbar
-                        color="teal"
-                        dark
-                        flat
-                    >
+                    <v-toolbar color="teal" dark flat>
                         <v-toolbar-title class="font-weight-light">BI</v-toolbar-title>
                         <v-toolbar-title>IS</v-toolbar-title>
                     </v-toolbar>
                     <v-card-text>
                         <v-form>
-                            <v-text-field
-                                color="teal"
-                                label="UserId"
-                                name="userId"
-                                type="text"
-                                v-model="id"
-                            />
-                            <v-text-field
-                                color="teal"
-                                id="password"
-                                label="Password"
-                                name="password"
-                                type="password"
-                                v-model="password"
-                            />
+                            <v-text-field color="teal" label="UserId" name="userId" type="text" v-model="id"/>
+                            <v-text-field color="teal" id="password" label="Password" name="password" type="password" v-model="password"/>
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer/>
-                        <v-btn color="teal" dark @click="signInClicked">Login</v-btn>
+                        <Button icon="mdi-login" text="Login" :click="signInClicked"></Button>
                     </v-card-actions>
                 </v-card>
             </v-col>

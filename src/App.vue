@@ -11,9 +11,6 @@
 <script>
 
 
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
-
 export default {
     name: 'App',
     data: function () {
@@ -62,11 +59,6 @@ export default {
         }catch (e){
             console.log(e);
         }
-
-    },
-    components: {
-        Navbar,
-        Sidebar
 
     },
 

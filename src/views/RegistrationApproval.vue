@@ -1,9 +1,5 @@
 <template>
-  <v-card
-          class="mx-auto"
-          max-width="1000"
-          max-height="700"
-  >
+  <v-card class="mx-auto" max-width="1000" max-height="700">
     <v-card-text class="black--text font-weight-bold text-center">
       <div>REGISTERED COURSES</div>
       <div>level {{this.$store.getters.getCurrentLevel}}  Term {{this.$store.getters.getCurrentTerm}}  Session {{this.$store.getters.getCurrentSession}}</div>
@@ -14,12 +10,8 @@
       <div>StudentId : {{this.$store.getters.getUserId}}</div>
     </v-card-text>
     <v-card-actions class="justify-center">
-      <v-simple-table
-              height="470px"
-              fixed-header
-      >
+      <v-simple-table height="470px" fixed-header>
         <template v-slot:default>
-
           <thead >
           <tr>
             <th v-for="item in headers" class="teal white--text">{{item}}</th>

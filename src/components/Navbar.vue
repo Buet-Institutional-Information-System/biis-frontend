@@ -10,7 +10,7 @@
           max-width="48"
           @click="$vuetify.goTo(0)"
       />
-      <v-toolbar-title class="display-1">Buet Institutional Informantion System</v-toolbar-title>
+      <v-toolbar-title class="display-1">Buet Institutional Information System</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-progress-circular :size="50" :width="5" indeterminate
                            v-if="$store.getters.getSpinnerFlag"></v-progress-circular>
@@ -51,7 +51,7 @@ export default {
       this.$store.commit('unsetUser');
       this.$store.commit('unsetUserInfo');
       localStorage.removeItem("token");
-      await this.$router.push('/');
+      await this.$router.push('/signIn');
       await this.axios.post('/logOut',sendObject);
       console.log("after logOut");
     }

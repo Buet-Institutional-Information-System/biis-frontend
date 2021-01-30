@@ -1,8 +1,5 @@
 <template>
-    <v-card
-            class="mx-auto"
-            max-width="1000"
-    >
+    <v-card class="mx-auto" max-width="1000">
         <v-card-text class="black--text font-weight-bold text-center">
           <div>OFFERED COURSES</div>
             <div>level {{this.$store.getters.getCurrentLevel}}  Term {{this.$store.getters.getCurrentTerm}}  Session {{this.$store.getters.getCurrentSession}}</div>
@@ -11,10 +8,8 @@
             </div>
         </v-card-text>
         <v-card-actions class="justify-center">
-            <v-simple-table  height="480" fixed-header
-            >
+            <v-simple-table  height="480" fixed-header>
                 <template v-slot:default>
-
                     <thead >
                     <tr>
                         <th v-for="item in headers" class="teal white--text">{{item}}</th>
@@ -40,11 +35,6 @@
                     <td>{{total_credit_hour}}</td>
                     <td></td>
                 </tr>
-<!--                <tr>-->
-<!--                    <td>Credit hours earned upto this term</td>-->
-<!--                    <td>19.5</td>-->
-<!--                    <td></td>-->
-<!--                </tr>-->
             </v-simple-table>
         </v-card-actions>
         <v-card-actions class="justify-center">
