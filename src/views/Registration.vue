@@ -19,7 +19,7 @@
             <tr v-for="item in course" :key="item.id">
                 <td>{{ item.COURSE_ID }}</td>
                 <td>{{ item.COURSE_TITLE }}</td>
-                <td>{{ item.CREDIT_HOUR }}</td>
+                <td>{{ (item.CREDIT_HOUR).toFixed(1)  }}</td>
                 <td>
                     <v-checkbox dense color="teal" v-model="item.select"></v-checkbox>
                 </td>
@@ -29,7 +29,7 @@
         <template #final>
         <tr>
             <td>Total credit hours in this term</td>
-            <td>{{ total_credit_hour }}</td>
+            <td>{{ (total_credit_hour).toFixed(2)  }}</td>
             <td></td>
         </tr>
         </template>

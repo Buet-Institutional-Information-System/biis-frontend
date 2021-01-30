@@ -11,15 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe180557-e1f0-4b26-ab3b-6d11afeebc1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Student/RegistrationCard.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Card.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Student/Card.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/EditInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/EditInfo.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/Registration.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Registration.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/RegistrationApproval.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/RegistrationApproval.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/ShowGrade.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ShowGrade.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/ViewGrade.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ViewGrade.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +95,7 @@
       <workItem from="1611896982711" duration="2900000" />
       <workItem from="1611901196614" duration="4168000" />
       <workItem from="1611916602794" duration="1043000" />
-      <workItem from="1611917775779" duration="40425000" />
+      <workItem from="1611917775779" duration="41906000" />
     </task>
     <servers />
   </component>

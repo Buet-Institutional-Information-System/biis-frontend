@@ -21,36 +21,36 @@
                     <tr v-for="item in course" :key="item.id">
                         <td>{{ item.COURSE_ID }}</td>
                         <td>{{ item.COURSE_TITLE }}</td>
-                        <td>{{ item.CREDIT_HOUR }}</td>
+                        <td>{{ (item.CREDIT_HOUR).toFixed(1)  }}</td>
                         <td>{{ item.OBTAINED_GRADE }}</td>
-                        <td>{{ item.OBTAINED_GRADE_POINT }}</td>
+                        <td>{{ (item.OBTAINED_GRADE_POINT).toFixed(2)  }}</td>
                     </tr>
                     </tbody>
                 </template>
         <template #final>
                 <tr>
                     <td>GPA</td>
-                    <td>{{ gpa }}</td>
+                    <td>{{ (parseFloat(gpa)).toFixed(2)  }}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Registered credit hours in this term</td>
-                    <td>{{ registered_credit_hours_this_term }}</td>
+                    <td>{{ (parseFloat(registered_credit_hours_this_term)).toFixed(2)  }}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Credit hours earned in this term</td>
-                    <td>{{ earned_credit_hours_this_term }}</td>
+                    <td>{{ (parseFloat(earned_credit_hours_this_term)).toFixed(2)  }}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Total Credit hours</td>
-                    <td>{{ total_credit_hours }}</td>
+                    <td>{{ (parseFloat(total_credit_hours)).toFixed(2)  }}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>CGPA</td>
-                    <td>{{ cgpa }}</td>
+                    <td>{{ (parseFloat(cgpa)).toFixed(2)  }}</td>
                     <td></td>
                 </tr>
         </template>
