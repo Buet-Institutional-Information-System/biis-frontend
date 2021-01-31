@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
     name: "Password",
     data: function () {
@@ -34,31 +35,15 @@ export default {
         }
     },
     methods: {
+        ...mapActions('student',['passwordChange']),
         async saveClicked() {
             console.log("Save clicked");
             if (this.newPassword !== this.re) {
                 console.log("Password typeError");
                 return;
             }
-            console.log("Frontend matched");
-            this.$store.commit('setSpinnerFlag');
-            console.log("Save clicked");
-            let sendObject = {
-                token: this.$store.getters.getToken,
-                password: this.currentPassword,
-                newpassword: this.newPassword
-            };
-            console.log(sendObject);
-            try {
-                let response = await this.axios.patch('/password', sendObject);
-                console.log("Received data from server is: ");
-                console.log(response.data);
-                await this.$router.push('/home');
-            } catch (e) {
-
-            } finally {
-                this.$store.commit('unsetSpinnerFlag');
-            }
+            console.log("passowrd change: new passwords matched");
+            await this.passwordChange({password:this.currentPassword,newpassword: this.newPassword})
         }
 
     }

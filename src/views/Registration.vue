@@ -2,11 +2,11 @@
     <RegistrationCard>
         <template #intro>
             <div>OFFERED COURSES</div>
-            <div>level {{ $store.getters.getCurrentLevel }} Term {{ $store.getters.getCurrentTerm }} Session
-                {{ $store.getters.getCurrentSession }}
+            <div>level {{ getCurrentLevel }} Term {{getCurrentTerm }} Session
+                {{ getCurrentSession }}
             </div>
             <div>
-                {{ $store.getters.getDept }}
+                {{ getDept }}
             </div>
         </template>
         <template #description>
@@ -16,10 +16,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="item in course" :key="item.id">
+            <tr v-for="item in getCourses" :key="item.id">
                 <td>{{ item.COURSE_ID }}</td>
                 <td>{{ item.COURSE_TITLE }}</td>
-                <td>{{ (item.CREDIT_HOUR).toFixed(1)  }}</td>
+                <td>{{ (parseFloat(item.CREDIT_HOUR)).toFixed(1)  }}</td>
                 <td>
                     <v-checkbox dense color="teal" v-model="item.select"></v-checkbox>
                 </td>
@@ -29,7 +29,7 @@
         <template #final>
         <tr>
             <td>Total credit hours in this term</td>
-            <td>{{ (total_credit_hour).toFixed(2)  }}</td>
+            <td>{{ (parseFloat(getTotalCreditHours)).toFixed(2)  }}</td>
             <td></td>
         </tr>
         </template>
@@ -41,71 +41,26 @@
 </template>
 
 <script>
-
+import {mapGetters,mapActions} from 'vuex'
 
 export default {
     name: "Registration",
     data: function () {
         return {
             headers: ["COURSE_ID", "TITLE", "CREDIT_HOUR", "SELECT"],
-            total_credit_hour: "",
-            course: []
         }
+    },
+    computed:{
+      ...mapGetters('student',['getCurrentLevel','getCurrentTerm','getCurrentSession','getDept','getTotalCreditHours','getCourses'])
     },
     async mounted() {
-        console.log("registration.vue MOUNTED");
-        this.$store.commit('setSpinnerFlag');
-        let sendObject = {
-            token: this.$store.getters.getToken,
-            term_id: this.$store.getters.getUserTerm,
-            available_dept: this.$store.getters.getUserDeptId
-        };
-        console.log(sendObject);
-        try {
-            let response = await this.axios.get('/registration', {params: sendObject});
-            console.log("Received data from server is: ", response.data.rows);
-            console.log(response.data.registration);
-            if (response.data.registration && response.data.rows.length !== 0) {
-                this.total_credit_hour = response.data.total_credit_hour;
-                response.data.rows.forEach(row => row['select'] = false);
-                response.data.rows.forEach(row => this.course.push(row));
-                console.log(this.course[0]);
-            } else if (!response.data.registration) {
-                this.$router.push('/registrationApproval');
-            } else {
-                console.log('Wrong Information');
-            }
-        } catch (e) {
-
-        } finally {
-            this.$store.commit('unsetSpinnerFlag');
-        }
+        await this.registration();
     },
     methods: {
-        async approvalClicked() {
-            console.log(this.course);
-            this.$store.commit('setSpinnerFlag');
-            let sendObject = {
-                token: this.$store.getters.getToken,
-                term_id: this.$store.getters.getUserTerm,
-                course_id: []
-            };
-            this.course.forEach(c => {
-                if (c['select'] === true) {
-                    sendObject.course_id.push(c['COURSE_ID']);
-                }
-            });
-            console.log(sendObject);
-            try {
-                let response = await this.axios.post('/insertRegistration', sendObject);
-
-                console.log("Response Status ", response.status);
-                this.$router.push('/registrationApproval');
-            } catch (e) {
-
-            } finally {
-                this.$store.commit('unsetSpinnerFlag');
-            }
+        ...mapActions('student',['registration','registrationSubmitClicked']),
+        async approvalClicked(){
+            console.log("inside registartionApprovalClicked getCourses: ",this.getCourses);
+            this.registrationSubmitClicked(this.getCourses);
         }
     }
 }

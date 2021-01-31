@@ -2,14 +2,14 @@
     <RegistrationCard>
         <template #intro>
             <div>REGISTERED COURSES</div>
-            <div>level {{ $store.getters.getCurrentLevel }} Term {{ $store.getters.getCurrentTerm }} Session
-                {{ $store.getters.getCurrentSession }}
+            <div>level {{ getCurrentLevel }} Term {{ getCurrentTerm }} Session
+                {{ getCurrentSession }}
             </div>
             <div>
-                {{ $store.getters.getDept }}
+                {{ getDept }}
             </div>
-            <div>Name : {{ $store.getters.getUserName }}</div>
-            <div>StudentId : {{ $store.getters.getUserId }}</div>
+            <div>Name : {{ getUserName }}</div>
+            <div>StudentId : {{ getUserId }}</div>
         </template>
         <template #description>
             <thead>
@@ -18,22 +18,22 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="item in course" :key="item.id">
+            <tr v-for="item in getCourses" :key="item.id">
                 <td>{{ item.COURSE_ID }}</td>
                 <td>{{ item.COURSE_TITLE }}</td>
-                <td>{{ (item.CREDIT_HOUR).toFixed(1) }}</td>
+                <td>{{ (parseFloat(item.CREDIT_HOUR)).toFixed(1) }}</td>
             </tr>
             </tbody>
         </template>
         <template #final>
             <tr>
                 <td>Registered credit hours in this term</td>
-                <td>{{ (registered_credit_hours_this_term).toFixed(2)  }}</td>
+                <td>{{ (parseFloat(getRegisteredCreditHours)).toFixed(2)  }}</td>
                 <td></td>
             </tr>
             <tr>
                 <td>Credit hours earned upto this term</td>
-                <td>{{ (credit_hours_upto_this_term).toFixed(2)  }}</td>
+                <td>{{ (parseFloat(getCreditHoursEarnedUptoThisTerm)).toFixed(2)  }}</td>
                 <td></td>
             </tr>
         </template>
@@ -41,9 +41,8 @@
         </template>
     </RegistrationCard>
 </template>
-
-
 <script>
+import {mapGetters,mapActions} from 'vuex'
 export default {
     name: "RegistrationApproval",
     data: function () {
@@ -54,35 +53,14 @@ export default {
             registered_credit_hours_this_term: ""
         }
     },
+    computed:{
+      ...mapGetters('student',['getDept','getCurrentLevel','getCurrentTerm','getCurrentSession','getUserName','getUserId','getCreditHoursEarnedUptoThisTerm','getRegisteredCreditHours','getCourses'])
+    },
     async mounted() {
-        console.log("registrationApproval.vue MOUNTED");
-        this.$store.commit('setSpinnerFlag');
-        let sendObject = {
-            token: this.$store.getters.getToken,
-            term_id: this.$store.getters.getUserTerm
-        };
-        console.log(sendObject);
-        try {
-            let response = await this.axios.get('/registrationApproval', {params: sendObject});
-            console.log("Received data from server is: ", response.data);
-            this.registered_credit_hours_this_term = response.data.registered_credit_hours;
-            this.credit_hours_upto_this_term = response.data.credit_hours_earned;
-            if (this.registered_credit_hours_this_term === null) {
-                this.registered_credit_hours_this_term = 0;
-            }
-            if (this.credit_hours_upto_this_term === null) {
-                this.credit_hours_upto_this_term = 0;
-            }
-            if (response.data.rows.length !== 0) {
-                response.data.rows.forEach(row => this.course.push(row));
-            } else {
-                console.log('Wrong Information');
-            }
-        } catch (e) {
-
-        } finally {
-            this.$store.commit('unsetSpinnerFlag');
-        }
+        await this.registrationApproval();
+    },
+    methods:{
+        ...mapActions('student',['registrationApproval'])
     }
 }
 </script>

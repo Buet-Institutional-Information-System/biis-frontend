@@ -14,18 +14,18 @@
             </v-card-actions>
        </template>
         <template #cardAction>
-            <Button icon="far fa-arrow-alt-circle-right" text="Submit" :click="home"></Button>
+            <Button icon="far fa-arrow-alt-circle-right" text="Submit" :click="gotoHome"></Button>
         </template>
    </Card>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
     export default {
         name: "Feedback",
         methods:{
-            home(){
-                this.$router.push('/home');
-            }
+            ...mapActions('student',['gotoHome'])
+
         }
     }
 </script>

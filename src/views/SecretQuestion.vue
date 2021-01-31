@@ -18,19 +18,18 @@
             </v-card-actions>
         </template>
         <template #cardAction>
-            <Button icon="far fa-share-square" text="Change" :click="home"></Button>
+            <Button icon="far fa-share-square" text="Change" :click="gotoHome"></Button>
         </template>
     </Card>
 </template>
 
 
 <script>
+import {mapActions} from 'vuex'
     export default {
         name: "SecretQuestion",
         methods:{
-            home(){
-                this.$router.push('/home');
-            }
+            ...mapActions('student',['gotoHome'])
         }
     }
 </script>

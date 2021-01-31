@@ -28,7 +28,7 @@
 export default {
     name: "SignIn",
     async mounted() {
-        if(this.$store.getters.getFlagSignIn){
+        if(this.$store.getters['sudent/getFlagSignIn']){
             this.$router.push('/home');
         }
 
@@ -42,7 +42,7 @@ export default {
 
     methods: {
         async signInClicked() {
-            this.$store.commit('setSpinnerFlag');
+            this.$store.commit('student/setSpinnerFlag');
             console.log("Sign In clicked");
 
             let sendObject = {
@@ -75,9 +75,9 @@ export default {
 
                     console.log(payload);
                     console.log("Inside if");
-                    this.$store.commit('setUser', payload);
-                    console.log("Sign in flag in store: ", this.$store.getters.getFlagSignIn, ", userId: ", this.$store.getters.getUserId, ", userPassword: ", this.$store.getters.getUserPassword);
-                    localStorage.setItem("token", this.$store.getters.getToken);
+                    this.$store.commit('student/setUser', payload);
+                    console.log("Sign in flag in store: ", this.$store.getters['student/getFlagSignIn'], ", userId: ", this.$store.getters['student/getUserId'], ", userPassword: ", this.$store.getters['student/getUserPassword']);
+                    localStorage.setItem("token", this.$store.getters['student/getToken']);
                     this.$router.push('/home');
                 } else {
                     console.log('Wrong Information');
@@ -86,7 +86,7 @@ export default {
             } catch (e) {
 
             } finally {
-                this.$store.commit('unsetSpinnerFlag');
+                this.$store.commit('student/unsetSpinnerFlag');
             }
         }
     }

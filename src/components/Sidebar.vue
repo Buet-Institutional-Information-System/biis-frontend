@@ -1,31 +1,23 @@
 <template>
-    <v-navigation-drawer
-            permanent
-            clipped
-            app
-
-    >
+    <v-navigation-drawer permanent clipped app>
         <v-list>
             <v-list-item class="px-2">
                 <v-list-item-avatar class=" mr-2">
-                    <v-img :src=$store.getters.getUserImage></v-img>
+                    <v-img :src=getUserImage></v-img>
                 </v-list-item-avatar>
             </v-list-item>
 
             <v-list-item link>
                 <v-list-item-content>
-                    <v-list-item-title class="title ">{{$store.getters.getUserName}}</v-list-item-title>
-                    <v-list-item-subtitle>{{$store.getters.getDept}}</v-list-item-subtitle>
+                    <v-list-item-title class="title ">{{getUserName}}</v-list-item-title>
+                    <v-list-item-subtitle>{{getDept}}</v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
         </v-list>
 
         <v-divider></v-divider>
 
-        <v-list
-                nav
-                dense
-        >
+        <v-list nav dense>
             <v-list-item link to="/registration">
                 <v-list-item-icon>
                     <v-icon>fas fa-edit</v-icon>
@@ -75,8 +67,12 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
     export default {
-        name: "Sidebar"
+        name: "Sidebar",
+        computed:{
+            ...mapGetters('student',['getUserImage','getUserName','getDept'])
+        }
     }
 </script>
 

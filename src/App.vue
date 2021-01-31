@@ -2,15 +2,14 @@
     <v-app id="app">
         <Navbar/>
         <v-content>
-            <Sidebar v-if="$store.getters.getFlagSignIn"/>
+            <Sidebar v-if="getFlagSignIn"/>
             <router-view v-if="autoLoginChecked"/>
         </v-content>
     </v-app>
 </template>
 
 <script>
-
-
+import {mapGetters} from 'vuex'
 export default {
     name: 'App',
     data: function () {
@@ -19,19 +18,20 @@ export default {
         }
 
     },
+    computed:{
+      ...mapGetters('student',["getFlagSignIn"])
+    },
     async mounted(){
-        if(localStorage.getItem('token')===null){
+        if(localStorage.getItem('token')===null ){
             this.autoLoginChecked = true;
+            console.log("Token found");
             return;
         }
-
-        console.log("token detected");
-        this.$store.commit('setToken',localStorage.getItem('token'));
-
-
-
+        console.log("token detected: ",localStorage.getItem('token'));
+        this.$store.commit('student/setToken',localStorage.getItem('token'));
+        console.log("App token from store: ",this.$store.getters['student/getToken']);
         let sendObject={
-            token: this.$store.getters.getToken
+            token: this.$store.getters['student/getToken']
         }
         console.log('token: ',sendObject);
 
@@ -41,7 +41,7 @@ export default {
 
                 let payload = {
                     id: response.data.rows[0].STUDENT_ID,
-                    token:this.$store.getters.getToken,
+                    token:this.$store.getters['student/getToken'],
                     term_id: response.data.rows[0].TERM_ID,
                     dept_id: response.data.rows[0].DEPT_ID,
                     name: response.data.rows[0].STUDENT_NAME,
@@ -53,13 +53,12 @@ export default {
                     dept: response.data.rows[0].DEPT_NAME,
                     adviserId: response.data.rows[0].INS_ID
                 };
-                this.$store.commit('setUser', payload);
+                this.$store.commit('student/setUser', payload);
                 this.autoLoginChecked=true;
             }
         }catch (e){
             console.log(e);
         }
-
     },
 
 
