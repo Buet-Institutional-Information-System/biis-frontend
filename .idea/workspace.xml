@@ -11,27 +11,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe180557-e1f0-4b26-ab3b-6d11afeebc1c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/store/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/getters.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/mutations.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Sidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Sidebar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/modules/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/admin/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/modules/student/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/student/actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/modules/student/getters.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/student/getters.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/modules/student/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/student/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/modules/student/mutations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/student/mutations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Adviser.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Adviser.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Contact.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Contact.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/EditInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/EditInfo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Feedback.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Feedback.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Password.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Password.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Registration.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Registration.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/RegistrationApproval.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/RegistrationApproval.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/SecretQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/SecretQuestion.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/SignIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/SignIn.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ShowGrade.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ShowGrade.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ViewGrade.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ViewGrade.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +32,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -57,18 +48,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../backend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\projects\database\frontend\src\store" />
+      <recent name="E:\projects\database\frontend\src\components\UI\Student" />
+      <recent name="E:\projects\database\frontend\src\views" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\projects\database\frontend\src\store\modules\student" />
       <recent name="E:\projects\database\frontend\src\components" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\projects\database\frontend\src\components\UI\Student" />
-      <recent name="E:\projects\database\frontend\src\views" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -114,7 +106,8 @@
       <workItem from="1611916602794" duration="1043000" />
       <workItem from="1611917775779" duration="42383000" />
       <workItem from="1612031484831" duration="17000" />
-      <workItem from="1612064233693" duration="32750000" />
+      <workItem from="1612064233693" duration="33481000" />
+      <workItem from="1612149966753" duration="7918000" />
     </task>
     <servers />
   </component>

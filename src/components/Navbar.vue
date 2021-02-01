@@ -44,7 +44,8 @@ export default {
     }
   },
   computed:{
-      ...mapGetters('student',['getFlagSignIn','getSpinnerFlag'])
+      ...mapGetters(['getSpinnerFlag']),
+      ...mapGetters('student',['getFlagSignIn'])
   },
   methods: {
     ...mapActions('student',['logOutClicked'])

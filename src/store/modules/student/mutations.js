@@ -63,12 +63,6 @@ export default{
         state.adviserDesignation="";
         state.adviserDept="";
     },
-    setSpinnerFlag(state){
-        state.spinnerFlag=true;
-    },
-    unsetSpinnerFlag(state){
-        state.spinnerFlag=false;
-    },
     setRegistration(state){
         state.registration=true;
     },
@@ -86,5 +80,20 @@ export default{
     },
     setCreditHoursEarnedUptoThisTerm(state,payload){
         state.credit_hours_upto_this_term=payload.credit_hours_earned_upto_this_term;
+    },
+    setEarnedCreditHoursThisTerm(state,payload){
+        state.earned_credit_hours_this_term=payload.earned_credit_hours_this_term;
+    },
+    setShowFlag(state,payload){
+        state.showFlag=payload.showFlag;
+    },
+    setGradeTermList(state,payload){
+        state.gradeTermList=payload;
+    },
+    setGPA(state,payload){
+        state.setGPA=payload.GPA;
+    },
+    setCGPA(state,payload){
+        state.CGPA=payload.CGPA;
     }
 }

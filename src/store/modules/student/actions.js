@@ -3,8 +3,8 @@ import axios from 'axios';
 
 export default {
     async adviser(context) {
-        context.commit('setSpinnerFlag');
         console.log("adviser clicked");
+        context.rootState.spinnerFlag = true;
         let sendObject = {
             id: context.getters.getAdviserId,
             token: context.getters.getToken
@@ -27,12 +27,13 @@ export default {
         } catch (e) {
             console.log("adviser catch error: ", e);
         } finally {
-            context.commit('unsetSpinnerFlag');
+            context.rootState.spinnerFlag = false;
         }
     },
     async contact(context) {
-        context.commit('setSpinnerFlag');
         console.log("contact clicked");
+        context.rootState.spinnerFlag = true;
+
 
         let sendObject = {
             token: context.getters.getToken
@@ -59,12 +60,13 @@ export default {
         } catch (e) {
             console.log("contact catch error: ", e);
         } finally {
-            context.commit('unsetSpinnerFlag');
+            context.rootState.spinnerFlag = false;
         }
     },
     async editConfirmClicked(context, payload) {
-        context.commit('student/setSpinnerFlag');
         console.log("editConfirm clicked");
+        context.rootState.spinnerFlag = true;
+
         console.log("payload from editInfo: ", payload);
         let sendObject = {
             token: context.getters.getToken,
@@ -83,12 +85,13 @@ export default {
         } catch (e) {
             console.log("editConfirm catch error: ", e);
         } finally {
-            context.commit('student/unsetSpinnerFlag');
             await context.dispatch('gotoContact');
+            context.rootState.spinnerFlag = false;
         }
     },
     async logOutClicked(context) {
         console.log("logOut clicked");
+        context.rootState.spinnerFlag = true;
         let sendObject = {
             token: context.getters.getToken
         }
@@ -100,10 +103,12 @@ export default {
         await router.push('/signIn');
         let response = await axios.post('/logOut', sendObject);
         console.log("logOut response: ", response);
+        context.rootState.spinnerFlag = false;
     },
     async passwordChange(context, payload) {
-        context.commit('setSpinnerFlag');
         console.log("passwordChange clicked");
+        context.commit('setSpinnerFlag');
+
         let sendObject = {
             ...payload,
             token: context.getters.getToken,
@@ -117,12 +122,12 @@ export default {
         } catch (e) {
             console.log("passwordChange catch error: ", e);
         } finally {
-            context.commit('unsetSpinnerFlag');
+            context.rootState.spinnerFlag = false;
         }
     },
     async registration(context) {
         console.log("registration clicked");
-        context.commit('setSpinnerFlag');
+        context.rootState.spinnerFlag = true;
         let sendObject = {
             token: context.getters.getToken,
             term_id: context.getters.getUserTerm,
@@ -147,46 +152,46 @@ export default {
         } catch (e) {
             console.log("registration catch error: ", e);
         } finally {
-            context.commit('unsetSpinnerFlag');
+            context.rootState.spinnerFlag = false;
         }
     },
     async registrationApproval(context) {
         console.log("registrationApproval clicked");
-        context.commit('setSpinnerFlag');
+        context.rootState.spinnerFlag = true;
         let sendObject = {
             token: context.getters.getToken,
             term_id: context.getters.getUserTerm
         };
-        console.log("registrationApproval sendObject: ",sendObject);
+        console.log("registrationApproval sendObject: ", sendObject);
         try {
             let response = await axios.get('/registrationApproval', {params: sendObject});
             console.log("registrationApproval respons data: ", response.data);
-            console.log("registrationApproval response.data.registered_credit_hours: ",response.data.registered_credit_hours);
-            console.log("registrationApproval response.data.credit_hours_earned: ",response.data.credit_hours_earned);
-            context.commit('setRegisteredCreditHours',{registered_credit_hours:response.data.registered_credit_hours});
-            context.commit('setCreditHoursEarnedUptoThisTerm',{credit_hours_earned_upto_this_term:response.data.credit_hours_earned});
-            if (response.data.registered_credit_hours=== null) {
-                context.commit('setRegisteredCreditHours',{registered_credit_hours:0});
+            console.log("registrationApproval response.data.registered_credit_hours: ", response.data.registered_credit_hours);
+            console.log("registrationApproval response.data.credit_hours_earned: ", response.data.credit_hours_earned);
+            context.commit('setRegisteredCreditHours', {registered_credit_hours: response.data.registered_credit_hours});
+            context.commit('setCreditHoursEarnedUptoThisTerm', {credit_hours_earned_upto_this_term: response.data.credit_hours_earned});
+            if (response.data.registered_credit_hours === null) {
+                context.commit('setRegisteredCreditHours', {registered_credit_hours: 0});
             }
-            if (response.data.credit_hours_earned=== null) {
-                context.commit('setCreditHoursEarnedUptoThisTerm',{credit_hours_earned_upto_this_term:0})
+            if (response.data.credit_hours_earned === null) {
+                context.commit('setCreditHoursEarnedUptoThisTerm', {credit_hours_earned_upto_this_term: 0})
             }
             if (response.data.rows.length !== 0) {
                 context.commit('setCourses', response.data.rows);
             } else {
                 console.log('registrationApproval else block');
             }
-            console.log("registrationApproval registered_credit_hours from store: ",context.getters.getRegisteredCreditHours);
-            console.log("registrationApproval credit_hours_earned_upto_this_term from store: ",context.getters.getCreditHoursEarnedUptoThisTerm);
+            console.log("registrationApproval registered_credit_hours from store: ", context.getters.getRegisteredCreditHours);
+            console.log("registrationApproval credit_hours_earned_upto_this_term from store: ", context.getters.getCreditHoursEarnedUptoThisTerm);
         } catch (e) {
             console.log("registrationApproval catch error: ", e);
         } finally {
-            context.commit('unsetSpinnerFlag');
+            context.rootState.spinnerFlag = false;
         }
     },
     async registrationSubmitClicked(context, payload) {
         console.log("registrationSubmitClicked ");
-        context.commit('setSpinnerFlag');
+        context.rootState.spinnerFlag = true;
         console.log("payload from registration: ", payload);
         let sendObject = {
             token: context.getters.getToken,
@@ -208,7 +213,101 @@ export default {
         } catch (e) {
             console.log("registrationSubmitClicked catch error: ", e);
         } finally {
-            context.commit('unsetSpinnerFlag');
+            context.rootState.spinnerFlag = false;
+        }
+    },
+    async showGrade(context, payload) {
+        console.log("showGrade clicked");
+        context.rootState.spinnerFlag = true;
+        console.log("payload from viewGrade: ", payload);
+        let sendObject = {
+            ...payload,
+            token: context.getters.getToken
+        }
+        console.log("showGrade sendObject: ", sendObject);
+        try {
+            let response = await axios.get('/showGrade', {params: sendObject});
+            console.log("showGrade response data rows: ", response.data.rows);
+            context.commit('setRegisteredCreditHours', {registered_credit_hours: response.data.registered_credit_hours});
+            context.commit('setEarnedCreditHoursThisTerm', {earned_credit_hours_this_term: response.data.earned_credit_hours});
+            context.commit('setTotalCreditHours', {total_credit_hours: response.data.total_credit_hours});
+            context.commit('setGPA', {GPA: response.data.gpa});
+            context.commit('setCGPA', {CGPA: response.data.cgpa});
+            if (response.data.rows.length != 0) {
+                let courses = [];
+                console.log('response data row length is not zero');
+                response.data.rows.forEach(row => courses.push(row));
+                context.commit('setCourses', courses);
+            } else {
+                console.log('showGrade else block');
+            }
+        } catch (e) {
+            console.log("showGrade catch error: ", e);
+        } finally {
+            context.rootState.spinnerFlag = false;
+        }
+    },
+    async signInClicked(context, payload) {
+        console.log("signIn clicked");
+        context.rootState.spinnerFlag = true;
+        console.log("payload from signIn: ",payload);
+        try {
+            let response = await axios.post('/signIn', payload);
+            console.log("signIn response data rows[0]: ");
+            console.log(response.data.rows[0]);
+            console.log("response data token: ", response.data.token);
+            if (response.data.rows.length != 0) {
+                let payload = {
+                    id: response.data.rows[0].STUDENT_ID,
+                    token: response.data.token,
+                    term_id: response.data.rows[0].TERM_ID,
+                    dept_id: response.data.rows[0].DEPT_ID,
+                    name: response.data.rows[0].STUDENT_NAME,
+                    level: response.data.rows[0].LVL,
+                    term: response.data.rows[0].TRM,
+                    session: response.data.rows[0].SSSN,
+                    hallName: response.data.rows[0].HALL_NAME,
+                    hallStatus: response.data.rows[0].HALL_STATUS,
+                    dept: response.data.rows[0].DEPT_NAME,
+                    adviserId: response.data.rows[0].INS_ID
+                };
+                console.log("after signIn payload: ",payload);
+                context.commit('setUser', payload);
+                localStorage.setItem("token", this.$store.getters['student/getToken']);
+                await context.dispatch('gotoHome');
+            } else {
+                console.log('signIn else block');
+            }
+        } catch (e) {
+            console.log("signIn catch error: ",e);
+        } finally {
+            context.rootState.spinnerFlag = false;
+        }
+    },
+    async viewGrade(context) {
+
+        console.log("viewGrade clicked");
+        context.rootState.spinnerFlag = true;
+        let sendObject = {
+            token: context.getters.getToken
+        };
+        console.log("viewGrade sendObject: ", sendObject);
+        try {
+            let response = await axios.get('/viewGrade', {params: sendObject});
+            console.log("viewGrade response data rows[0]: ", response.data.rows[0]);
+
+            if (response.data.rows.length != 0) {
+                let terms = [];
+                response.data.rows.forEach(row => terms.push('20' + row.slice(0, 3) + '20' + row.slice(3,)));
+                console.log('viewGrade terms: ', terms);
+                context.commit('setGradeTermList', terms);
+            } else {
+                context.commit('setShowFlag', {showFlag: false});
+            }
+        } catch (e) {
+            console.log("viewGrade catch error: ", e);
+        } finally {
+            context.rootState.spinnerFlag = false;
         }
     },
     gotoEditInfo() {
@@ -222,5 +321,11 @@ export default {
     },
     gotoRegistrationApproval() {
         router.push('/registrationApproval');
+    },
+    gotoShowGrade(_, payload) {
+        router.push({name: 'ShowGrade', params: payload});
+    },
+    gotoViewGrade() {
+        router.push('/viewGrade');
     }
 }

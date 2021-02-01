@@ -1,88 +1,87 @@
-import axios from "axios";
-
-export default{
-    getFlagSignIn: state =>{
+import axios from 'axios';
+export default {
+    getFlagSignIn: state => {
         return state.flagSignIn;
     },
-    getUserId:state=>{
-        return  state.userId;
+    getUserId: state => {
+        return state.userId;
     },
-    getUserTerm:state=>{
-        return  state.termId;
+    getUserTerm: state => {
+        return state.termId;
     },
-    getUserDeptId:state=>{
-        return  state.deptId;
+    getUserDeptId: state => {
+        return state.deptId;
     },
-    getUserName:state=>{
+    getUserName: state => {
         return state.userName;
     },
-    getToken:state=>{
+    getToken: state => {
         return state.token;
     },
-    getDept:state=>{
+    getDept: state => {
         return state.dept;
     },
-    getCurrentLevel:state=>{
+    getCurrentLevel: state => {
         return state.currentLevel;
     },
-    getCurrentTerm:state=>{
+    getCurrentTerm: state => {
         return state.currentTerm;
     },
-    getCurrentSession:state=>{
+    getCurrentSession: state => {
         return state.currentSession;
     },
-    getHallName:state=>{
+    getHallName: state => {
         return state.hallName;
     },
-    getHallStatus:state=>{
+    getHallStatus: state => {
         return state.hallStatus;
     },
-    getAdviserId:state=>{
+    getAdviserId: state => {
         return state.adviserId;
     },
-    getAdviserName:state=>{
+    getAdviserName: state => {
         return state.adviserName;
     },
-    getAdviserDesignation:state=>{
+    getAdviserDesignation: state => {
         return state.adviserDesignation;
     },
-    getAdviserDept:state=>{
+    getAdviserDept: state => {
         return state.adviserDept;
     },
-    getPhone:state=>{
+    getPhone: state => {
         return state.phone;
     },
-    getEmail:state=>{
+    getEmail: state => {
         return state.email;
     },
-    getContactPersonName:state=>{
+    getContactPersonName: state => {
         return state.contact_person_name;
     },
-    getContactPersonNumber:state=>{
+    getContactPersonNumber: state => {
         return state.contact_person_number;
     },
-    getAddress:state=>{
+    getAddress: state => {
         return state.address;
     },
-    getUserImage:state=>{
-        return axios.defaults.baseURL+'/student/'+state.userId+'.jpg';
+    getUserImage: state => {
+        return axios.defaults.baseURL + '/student/' + state.userId + '.jpg';
         //return 'http://localhost:1148/student/'+state.userId+'.jpg';
     },
-    getAdviserImage:state=>{
-        return axios.defaults.baseURL+'/adviser/'+state.adviserId+'.jpg';
+    getAdviserImage: state => {
+        return axios.defaults.baseURL + '/adviser/' + state.adviserId + '.jpg';
         //return 'http://localhost:1148/adviser/'+state.adviserId+'.jpg';
     },
-    getSpinnerFlag:state=>{
+    getSpinnerFlag: state => {
         return state.spinnerFlag;
     },
-    getContacts:state=>{
+    getContacts: state => {
         return {
             'Name': state.userName,
             'Student Id': state.userId,
             'Level/Term': state.currentLevel + '/' + state.currentTerm,
         };
     },
-    getEdits:state=>{
+    getEdits: state => {
         return {
             'Phone No': state.phone,
             'Email': state.email,
@@ -91,16 +90,31 @@ export default{
             'Residential Area': state.address
         };
     },
-    getCourses:state=>{
+    getCourses: state => {
         return state.courses;
     },
-    getTotalCreditHours:state=>{
+    getTotalCreditHours: state => {
         return state.total_credit_hours;
     },
-    getRegisteredCreditHours:state=>{
+    getRegisteredCreditHours: state => {
         return state.registered_credit_hours;
     },
-    getCreditHoursEarnedUptoThisTerm:state=>{
+    getCreditHoursEarnedUptoThisTerm: state => {
         return state.credit_hours_upto_this_term;
+    },
+    getGradeTermList: state => {
+        return state.gradeTermList;
+    },
+    getShowFlag: state => {
+        return state.showFlag;
+    },
+    getEarnedCreditHoursThisTerm: state => {
+        return state.earned_credit_hours_this_term;
+    },
+    getGPA:state=>{
+        return state.getGPA;
+    },
+    getCGPA:state=>{
+        return state.getCGPA;
     }
 }

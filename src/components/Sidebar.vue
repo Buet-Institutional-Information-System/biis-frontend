@@ -3,7 +3,7 @@
         <v-list>
             <v-list-item class="px-2">
                 <v-list-item-avatar class=" mr-2">
-                    <v-img :src=getUserImage></v-img>
+                    <v-img :src="getUserImage"></v-img>
                 </v-list-item-avatar>
             </v-list-item>
 
