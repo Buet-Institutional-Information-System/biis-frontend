@@ -40,12 +40,6 @@ export default{
         state.contact_person_number=payload.contact_person_number;
         state.address=payload.address;
     },
-    setFlagSignIn(state){
-        state.flagSignIn=true;
-    },
-    unsetFlagSignIn(state){
-        state.flagSignIn=false;
-    },
     unsetUserInfo(state){
         state.phone="";
         state.email="";
@@ -62,12 +56,6 @@ export default{
         state.adviserName="";
         state.adviserDesignation="";
         state.adviserDept="";
-    },
-    setRegistration(state){
-        state.registration=true;
-    },
-    unsetRegistration(state){
-        state.registration=false;
     },
     setCourses(state,payload){
         state.courses=payload;
@@ -91,9 +79,9 @@ export default{
         state.gradeTermList=payload;
     },
     setGPA(state,payload){
-        state.setGPA=payload.GPA;
+        state.gpa=payload.gpa;
     },
     setCGPA(state,payload){
-        state.CGPA=payload.CGPA;
+        state.cgpa=payload.cgpa;
     }
 }

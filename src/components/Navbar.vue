@@ -19,12 +19,12 @@
       <v-icon left>mdi-star-settings-outline</v-icon>
       <span style="font-size:x-large">Admin</span>
     </v-tab>
-    <v-tab v-if="getFlagSignIn" link to="/home">
+    <v-tab v-if="getFlagSignIn && $route.name!=='Admin'" link to="/home">
       <v-icon left>mdi-home-outline</v-icon>
       <span right>Home</span>
     </v-tab>
 
-    <v-tab v-if="getFlagSignIn" @click="logOutClicked">
+    <v-tab v-if="getFlagSignIn && $route.name!=='Admin'" @click="logOutClicked">
       <v-icon left>mdi-logout</v-icon>
       <span class="font-weight-light">Log</span>
       <span class="font-weight-medium">Out</span>

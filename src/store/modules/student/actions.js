@@ -30,6 +30,41 @@ export default {
             context.rootState.spinnerFlag = false;
         }
     },
+    async app(context){
+        context.rootState.spinnerFlag = true;
+        console.log("token detected in app: ",localStorage.getItem('token'));
+        context.commit('setToken',localStorage.getItem('token'));
+        let sendObject={
+            token: context.getters.getToken
+        }
+        console.log('app sendObject ',sendObject);
+        try {
+            let response = await axios.get('/signIn',{params:sendObject});
+            console.log("app response: ",response);
+            if (response.data.rows.length != 0) {
+                let payload = {
+                    id: response.data.rows[0].STUDENT_ID,
+                    token:context.getters.getToken,
+                    term_id: response.data.rows[0].TERM_ID,
+                    dept_id: response.data.rows[0].DEPT_ID,
+                    name: response.data.rows[0].STUDENT_NAME,
+                    level: response.data.rows[0].LVL,
+                    term: response.data.rows[0].TRM,
+                    session: response.data.rows[0].SSSN,
+                    hallName: response.data.rows[0].HALL_NAME,
+                    hallStatus: response.data.rows[0].HALL_STATUS,
+                    dept: response.data.rows[0].DEPT_NAME,
+                    adviserId: response.data.rows[0].INS_ID
+                };
+                context.commit('setUser', payload);
+                //this.autoLoginChecked=true;
+            }
+        }catch (e){
+            console.log("app catch error: ",e);
+        }finally{
+            context.rootState.spinnerFlag = false;
+        }
+    },
     async contact(context) {
         console.log("contact clicked");
         context.rootState.spinnerFlag = true;
@@ -86,6 +121,43 @@ export default {
             console.log("editConfirm catch error: ", e);
         } finally {
             await context.dispatch('gotoContact');
+            context.rootState.spinnerFlag = false;
+        }
+    },
+    async logInClicked(context, payload) {
+        console.log("signIn clicked");
+        context.rootState.spinnerFlag = true;
+        console.log("payload from signIn: ",payload);
+        try {
+            let response = await axios.post('/signIn', payload);
+            console.log("signIn response data rows[0]: ");
+            console.log(response.data.rows[0]);
+            console.log("response data token: ", response.data.token);
+            if (response.data.rows.length != 0) {
+                let payload1 = {
+                    id: response.data.rows[0].STUDENT_ID,
+                    token: response.data.token,
+                    term_id: response.data.rows[0].TERM_ID,
+                    dept_id: response.data.rows[0].DEPT_ID,
+                    name: response.data.rows[0].STUDENT_NAME,
+                    level: response.data.rows[0].LVL,
+                    term: response.data.rows[0].TRM,
+                    session: response.data.rows[0].SSSN,
+                    hallName: response.data.rows[0].HALL_NAME,
+                    hallStatus: response.data.rows[0].HALL_STATUS,
+                    dept: response.data.rows[0].DEPT_NAME,
+                    adviserId: response.data.rows[0].INS_ID
+                };
+                console.log("after signIn payload: ",payload1);
+                context.commit('setUser', payload1);
+                localStorage.setItem("token", context.getters.getToken);
+                await context.dispatch('gotoHome');
+            } else {
+                console.log('signIn else block');
+            }
+        } catch (e) {
+            console.log("signIn catch error: ",e);
+        } finally {
             context.rootState.spinnerFlag = false;
         }
     },
@@ -227,12 +299,16 @@ export default {
         console.log("showGrade sendObject: ", sendObject);
         try {
             let response = await axios.get('/showGrade', {params: sendObject});
-            console.log("showGrade response data rows: ", response.data.rows);
+            console.log("showGrade response data: ", response.data);
             context.commit('setRegisteredCreditHours', {registered_credit_hours: response.data.registered_credit_hours});
             context.commit('setEarnedCreditHoursThisTerm', {earned_credit_hours_this_term: response.data.earned_credit_hours});
             context.commit('setTotalCreditHours', {total_credit_hours: response.data.total_credit_hours});
-            context.commit('setGPA', {GPA: response.data.gpa});
-            context.commit('setCGPA', {CGPA: response.data.cgpa});
+            console.log('showGrade gpa from response data: ',response.data.gpa);
+            console.log('showGrade cgpa from response data: ',response.data.cgpa);
+            context.commit('setGPA',{gpa: response.data.gpa});
+            context.commit('setCGPA', {cgpa:response.data.cgpa});
+            console.log('showGrade gpa from store: ',context.getters.getGPA);
+            console.log('showGrade cgpa from store: ',context.getters.getCGPA);
             if (response.data.rows.length != 0) {
                 let courses = [];
                 console.log('response data row length is not zero');
@@ -243,43 +319,6 @@ export default {
             }
         } catch (e) {
             console.log("showGrade catch error: ", e);
-        } finally {
-            context.rootState.spinnerFlag = false;
-        }
-    },
-    async signInClicked(context, payload) {
-        console.log("signIn clicked");
-        context.rootState.spinnerFlag = true;
-        console.log("payload from signIn: ",payload);
-        try {
-            let response = await axios.post('/signIn', payload);
-            console.log("signIn response data rows[0]: ");
-            console.log(response.data.rows[0]);
-            console.log("response data token: ", response.data.token);
-            if (response.data.rows.length != 0) {
-                let payload = {
-                    id: response.data.rows[0].STUDENT_ID,
-                    token: response.data.token,
-                    term_id: response.data.rows[0].TERM_ID,
-                    dept_id: response.data.rows[0].DEPT_ID,
-                    name: response.data.rows[0].STUDENT_NAME,
-                    level: response.data.rows[0].LVL,
-                    term: response.data.rows[0].TRM,
-                    session: response.data.rows[0].SSSN,
-                    hallName: response.data.rows[0].HALL_NAME,
-                    hallStatus: response.data.rows[0].HALL_STATUS,
-                    dept: response.data.rows[0].DEPT_NAME,
-                    adviserId: response.data.rows[0].INS_ID
-                };
-                console.log("after signIn payload: ",payload);
-                context.commit('setUser', payload);
-                localStorage.setItem("token", this.$store.getters['student/getToken']);
-                await context.dispatch('gotoHome');
-            } else {
-                console.log('signIn else block');
-            }
-        } catch (e) {
-            console.log("signIn catch error: ",e);
         } finally {
             context.rootState.spinnerFlag = false;
         }

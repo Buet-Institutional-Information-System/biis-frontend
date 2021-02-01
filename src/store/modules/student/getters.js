@@ -48,21 +48,6 @@ export default {
     getAdviserDept: state => {
         return state.adviserDept;
     },
-    getPhone: state => {
-        return state.phone;
-    },
-    getEmail: state => {
-        return state.email;
-    },
-    getContactPersonName: state => {
-        return state.contact_person_name;
-    },
-    getContactPersonNumber: state => {
-        return state.contact_person_number;
-    },
-    getAddress: state => {
-        return state.address;
-    },
     getUserImage: state => {
         return axios.defaults.baseURL + '/student/' + state.userId + '.jpg';
         //return 'http://localhost:1148/student/'+state.userId+'.jpg';
@@ -70,9 +55,6 @@ export default {
     getAdviserImage: state => {
         return axios.defaults.baseURL + '/adviser/' + state.adviserId + '.jpg';
         //return 'http://localhost:1148/adviser/'+state.adviserId+'.jpg';
-    },
-    getSpinnerFlag: state => {
-        return state.spinnerFlag;
     },
     getContacts: state => {
         return {
@@ -112,9 +94,9 @@ export default {
         return state.earned_credit_hours_this_term;
     },
     getGPA:state=>{
-        return state.getGPA;
+        return state.gpa;
     },
     getCGPA:state=>{
-        return state.getCGPA;
+        return state.cgpa;
     }
 }

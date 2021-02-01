@@ -42,16 +42,13 @@ export default {
       ...mapGetters('student',['getFlagSignIn']),
     },
     methods: {
-        ...mapActions('student',['gotoHome','signInClicked']),
+        ...mapActions('student',['gotoHome','logInClicked']),
         async signInClicked() {
-
-
             let sendObject = {
                 id: this.id,
                 password: this.password
             };
-
-
+            await this.logInClicked(sendObject);
         }
     }
 }

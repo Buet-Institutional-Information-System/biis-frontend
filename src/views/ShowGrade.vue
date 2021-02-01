@@ -6,10 +6,10 @@
                 {{ $route.params.academic_term.slice(0, 9) }}
             </div>
             <div>
-                {{$store.getters.getDept }}
+                {{getDept }}
             </div>
-            <div>Name : {{$store.getters.getUserName }}</div>
-            <div>StudentId : {{$store.getters.getUserId }}</div>
+            <div>Name : {{getUserName }}</div>
+            <div>StudentId : {{getUserId }}</div>
         </template>
         <template #description>
                     <thead>
@@ -30,7 +30,7 @@
         <template #final>
                 <tr>
                     <td>GPA</td>
-                    <td>{{ (parseFloat(gpa)).toFixed(2)  }}</td>
+                    <td>{{ (parseFloat(getGPA)).toFixed(2)  }}</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -69,7 +69,7 @@ export default {
         }
     },
     computed:{
-        ...mapGetters('student',['getCourses','getRegisteredCreditHours','getEarnedCreditHoursThisTerm','getTotalCreditHours','getGPA','getCGPA'])
+        ...mapGetters('student',['getUserName','getUserId','getDept','getCourses','getRegisteredCreditHours','getEarnedCreditHoursThisTerm','getTotalCreditHours','getGPA','getCGPA'])
     },
     async mounted() {
         if (this.$route.params.academic_term === undefined) {

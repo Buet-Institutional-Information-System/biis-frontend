@@ -21,7 +21,7 @@
             </v-file-input>
             <v-row>
                 <v-col cols="12" md="6">
-                    <v-select v-model="insDept" :items="deptList" label="Departments" color="teal">
+                    <v-select v-model="insDept" :items="getDeptList" label="Departments" color="teal">
                     </v-select>
                 </v-col>
                 <v-col cols="12" md="6">
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-
+import {mapGetters,mapActions} from 'vuex'
 export default {
     name: "AdminTeacher",
     data:()=>({
@@ -63,30 +63,17 @@ export default {
         insDept: "",
         insDesignation: "",
         adviserImage: null,
-        deptList:[]
-    }),
-    async mounted() {
-        this.$store.commit('setSpinnerFlag');
-        this.$store.commit('unsetFlagSignIn');
-        console.log('admin mounted');
 
-        try {
-            let response = await this.axios.get('/admin/depts');
-            //console.log(response.data);
-            if (response.data.length != 0) {
-                this.deptList = response.data;
-                //console.log(this.deptList);
-            }
-        } catch (e) {
-            console.log(e);
-        } finally {
-            this.$store.commit('unsetSpinnerFlag');
-        }
+    }),
+    computed:{
+      ...mapGetters('admin',['getDeptList'])
+    },
+    async mounted() {
+        await this.adminTeacher();
     },
     methods:{
+        ...mapActions('admin',['adminTeacher','adminInsertTeacher','adminUpdateDesignation','adminDeleteTeacher']),
         async insertTeacher() {
-            console.log("this.adviserImage: ", this.adviserImage[0]);
-            this.$store.commit('setSpinnerFlag');
             let sendObject = {
                 id: this.insId,
                 name: this.insName,
@@ -94,61 +81,37 @@ export default {
                 designation: this.insDesignation,
                 adviserImage: this.adviserImage[0]
             }
-            let formData = new FormData();
-            for (let item in sendObject) {
-                formData.append(item, sendObject[item]);
-            }
-            console.log(formData.get('id'));
-            console.log(formData.get('name'));
-            console.log(formData.get('dept'));
-            console.log(formData.get('designation'));
-            try {
-                let response = await this.axios.post('/admin/teacher', formData);
-                this.insId = "";
-                this.insName = "";
-                this.insDept = "";
-                this.insDesignation = "";
-                this.adviserImage = null;
-                console.log(response);
-            } catch (e) {
-                console.log(e);
-            } finally {
-                this.$store.commit('unsetSpinnerFlag');
+            let response=await this.adminInsertTeacher(sendObject);
+            if (response === 'clear') {
+                this.clear();
             }
         },
         async updateDesignation() {
-            this.$store.commit('setSpinnerFlag');
             let sendObject = {
                 id: this.insId,
                 designation: this.insDesignation
             }
-            try {
-                let response = await this.axios.patch('/admin/updateDesignation', sendObject);
-                this.insId = "";
-                this.insDesignation = "";
-                console.log(response);
-            } catch (e) {
-                console.log(e);
-            } finally {
-                this.$store.commit('unsetSpinnerFlag');
+            let response=await this.adminUpdateDesignation(sendObject);
+            if (response === 'clear') {
+                this.clear();
             }
         },
         async deleteTeacher() {
-            this.$store.commit('setSpinnerFlag');
+
             let sendObject = {
                 id: this.insId
+            };
+            let response=await this.adminDeleteTeacher(sendObject);
+            if (response === 'clear') {
+                this.clear();
             }
-            console.log(sendObject);
-            try {
-                let response = await this.axios.delete('/admin/teacher', {data: sendObject});
-                this.insId = "";
-                this.insDesignation = "";
-                console.log(response);
-            } catch (e) {
-                console.log(e);
-            } finally {
-                this.$store.commit('unsetSpinnerFlag');
-            }
+        },
+        clear(){
+            this.insId = "";
+            this.insName = "";
+            this.insDept = "";
+            this.insDesignation = "";
+            this.adviserImage = null;
         }
     }
 }
