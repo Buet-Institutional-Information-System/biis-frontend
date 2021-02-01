@@ -9,9 +9,13 @@
                     </v-toolbar>
                     <v-card-text>
                         <v-form>
-                            <v-text-field color="teal" label="UserId" name="userId" type="text" v-model="id"/>
-                            <v-text-field color="teal" id="password" label="Password" name="password" type="password" v-model="password"/>
+                            <v-text-field color="teal" label="UserId" name="userId" type="text" v-model.trim="id"/>
+                            <v-text-field color="teal" id="password" label="Password" name="password" type="password"
+                                          v-model.trim="password"/>
                         </v-form>
+                        <v-alert type="error" dense outlined v-if="status!==200 && status!==null" >
+                            {{getErrorMessage}}
+                        </v-alert>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer/>
@@ -24,11 +28,12 @@
 </template>
 
 <script>
-import {mapActions,mapGetters} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
+
 export default {
     name: "SignIn",
     async mounted() {
-        if(this.getFlagSignIn){
+        if (this.getFlagSignIn) {
             await this.gotoHome();
         }
     },
@@ -36,19 +41,22 @@ export default {
         return {
             id: "",
             password: "",
+            status: null,
         }
     },
-    computed:{
-      ...mapGetters('student',['getFlagSignIn']),
+    computed: {
+        ...mapGetters(['getErrorMessage', 'getMessage']),
+        ...mapGetters('student', ['getFlagSignIn']),
     },
     methods: {
-        ...mapActions('student',['gotoHome','logInClicked']),
+        ...mapActions('student', ['gotoHome', 'logInClicked']),
         async signInClicked() {
+            this.status=null;
             let sendObject = {
                 id: this.id,
                 password: this.password
             };
-            await this.logInClicked(sendObject);
+            this.status = await this.logInClicked(sendObject);
         }
     }
 }

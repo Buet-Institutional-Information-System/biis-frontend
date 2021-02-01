@@ -4,8 +4,10 @@
         <v-content>
             <Sidebar v-if="getFlagSignIn && $route.name!=='Admin'"/>
             <router-view/>
+
 <!--            <router-view v-if="autoLoginChecked"/>-->
         </v-content>
+
     </v-app>
 </template>
 

@@ -128,6 +128,7 @@ export default {
         console.log("signIn clicked");
         context.rootState.spinnerFlag = true;
         console.log("payload from signIn: ",payload);
+
         try {
             let response = await axios.post('/signIn', payload);
             console.log("signIn response data rows[0]: ");
@@ -152,11 +153,15 @@ export default {
                 context.commit('setUser', payload1);
                 localStorage.setItem("token", context.getters.getToken);
                 await context.dispatch('gotoHome');
+                context.rootState.message=response.data.message;
+                return response.status;
             } else {
                 console.log('signIn else block');
             }
         } catch (e) {
-            console.log("signIn catch error: ",e);
+            console.log("signIn catch error response data: ",e.response.data);
+            context.rootState.errorMessage=e.response.data.message;
+            return e.response.status;
         } finally {
             context.rootState.spinnerFlag = false;
         }
