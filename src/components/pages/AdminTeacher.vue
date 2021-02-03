@@ -8,24 +8,24 @@
         <template #create>
             <v-row>
                 <v-col cols="12" md="6">
-                    <v-text-field v-model="insId" label="Teacher Id" color="teal">
+                    <v-text-field v-model.trim="insId" label="Teacher Id" color="teal">
                     </v-text-field>
                 </v-col>
                 <v-col cols="12" md="6">
-                    <v-text-field v-model="insName" label="Name" color="teal">
+                    <v-text-field v-model.trim="insName" label="Name" color="teal">
                     </v-text-field>
                 </v-col>
             </v-row>
-            <v-file-input small-chips multiple prepend-icon="mdi-camera" v-model="adviserImage" label="Teacher Image"
+            <v-file-input small-chips multiple prepend-icon="mdi-camera" v-model.trim="adviserImage" label="Teacher Image"
                           color="teal">
             </v-file-input>
             <v-row>
                 <v-col cols="12" md="6">
-                    <v-select v-model="insDept" :items="getDeptList" label="Departments" color="teal">
+                    <v-select v-model.trim="insDept" :items="getDeptList" label="Departments" color="teal">
                     </v-select>
                 </v-col>
                 <v-col cols="12" md="6">
-                    <v-select v-model="insDesignation"
+                    <v-select v-model.trim="insDesignation"
                               :items="['Professor','Associate Professor','Assistant Professor','Lecturer']"
                               label="Designation" color="teal">
                     </v-select>
@@ -35,9 +35,9 @@
             </Button>
         </template>
         <template #update>
-            <v-text-field v-model="insId" label="Teacher Id" color="teal">
+            <v-text-field v-model.trim="insId" label="Teacher Id" color="teal">
             </v-text-field>
-            <v-select v-model="insDesignation"
+            <v-select v-model.trim="insDesignation"
                       :items="['Professor','Associate Professor','Assistant Professor','Lecturer']" label="Designation"
                       color="teal">
             </v-select>
@@ -45,7 +45,7 @@
             </Button>
         </template>
         <template #delete>
-            <v-text-field v-model="insId" label="Teacher Id" color="teal">
+            <v-text-field v-model.trim="insId" label="Teacher Id" color="teal">
             </v-text-field>
             <Button icon="mdi-delete-sweep-outline" text="Delete Teacher" :click="deleteTeacher">
             </Button>

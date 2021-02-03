@@ -15,7 +15,7 @@ export default new Vuex.Store({
   state:{
       spinnerFlag:false,
       message:null,
-      errorMessage:null
+      messageType:null
   },
   getters:rootGetters,
   mutations:rooMutations,

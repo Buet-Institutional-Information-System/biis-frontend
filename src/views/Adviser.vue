@@ -8,7 +8,7 @@
                 <v-list-item class="subtitle-2">{{getAdviserDept}}</v-list-item>
             </v-list-item-content>
             <v-list-item-avatar tile size="200" color="grey">
-                <v-img :src=getAdviserImage class="mt-1"/>
+                <v-img :src="getAdviserImage" class="mt-1"/>
             </v-list-item-avatar>
         </v-list-item>
     </v-card>

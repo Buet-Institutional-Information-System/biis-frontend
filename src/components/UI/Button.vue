@@ -1,5 +1,5 @@
 <template>
-    <v-btn color="teal" dark @click="click">
+    <v-btn color="teal" class="white--text" @click="click" :disabled="disabled">
         <v-icon left>{{icon}}</v-icon>
         <span right>{{text}}</span>
     </v-btn>
@@ -17,6 +17,11 @@ export default {
         },
         'click':{
             required:true,
+        },
+        'disabled':{
+            type:Boolean,
+            required:false,
+            default: false
         }
     }
 }

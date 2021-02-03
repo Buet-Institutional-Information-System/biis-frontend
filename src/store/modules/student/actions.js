@@ -39,8 +39,8 @@ export default {
         }
         console.log('app sendObject ',sendObject);
         try {
-            let response = await axios.get('/signIn',{params:sendObject});
-            console.log("app response: ",response);
+             let response = await axios.get('/signIn',{params:sendObject});
+             console.log("app response: ",response);
             if (response.data.rows.length != 0) {
                 let payload = {
                     id: response.data.rows[0].STUDENT_ID,
@@ -57,10 +57,10 @@ export default {
                     adviserId: response.data.rows[0].INS_ID
                 };
                 context.commit('setUser', payload);
-                //this.autoLoginChecked=true;
+                return true;
             }
         }catch (e){
-            console.log("app catch error: ",e);
+            console.log("app catch error: ",e.response.data);
         }finally{
             context.rootState.spinnerFlag = false;
         }
@@ -113,12 +113,17 @@ export default {
         };
         console.log('editConfirm sendObject: ', sendObject);
         try {
-            console.log("inside try");
             let response = await axios.patch('/editInfo', sendObject);
             console.log("editConfirm response: ");
             console.log(response);
+            context.rootState.messageType="success";
+            context.rootState.message=response.data.message;
+            return response.status;
         } catch (e) {
-            console.log("editConfirm catch error: ", e);
+            console.log("editConfirm catch error: ", e.response.data);
+            context.rootState.messageType="error";
+            context.rootState.message=e.response.data.message;
+            return e.response.status;
         } finally {
             await context.dispatch('gotoContact');
             context.rootState.spinnerFlag = false;
@@ -153,6 +158,7 @@ export default {
                 context.commit('setUser', payload1);
                 localStorage.setItem("token", context.getters.getToken);
                 await context.dispatch('gotoHome');
+                context.rootState.messageType="success";
                 context.rootState.message=response.data.message;
                 return response.status;
             } else {
@@ -160,7 +166,8 @@ export default {
             }
         } catch (e) {
             console.log("signIn catch error response data: ",e.response.data);
-            context.rootState.errorMessage=e.response.data.message;
+            context.rootState.messageType="error";
+            context.rootState.message=e.response.data.message;
             return e.response.status;
         } finally {
             context.rootState.spinnerFlag = false;
@@ -196,8 +203,14 @@ export default {
             console.log("passwordChange response: ");
             console.log(response.data);
             await context.dispatch('gotoHome');
+            context.rootState.messageType="success";
+            context.rootState.message=response.data.message;
+            return response.status;
         } catch (e) {
-            console.log("passwordChange catch error: ", e);
+            console.log("passwordChange catch error: ", e.response.data);
+            context.rootState.messageType="error";
+            context.rootState.message=e.response.data.message;
+            return e.response.status;
         } finally {
             context.rootState.spinnerFlag = false;
         }
@@ -267,28 +280,29 @@ export default {
         }
     },
     async registrationSubmitClicked(context, payload) {
-        console.log("registrationSubmitClicked ");
+        console.log("registrationSubmit clicked ");
         context.rootState.spinnerFlag = true;
         console.log("payload from registration: ", payload);
         let sendObject = {
             token: context.getters.getToken,
             term_id: context.getters.getUserTerm,
-            course_id: []
+            course_id: [...payload]
         };
 
-        payload.forEach(c => {
-            if (c['select'] === true) {
-                sendObject.course_id.push(c['COURSE_ID']);
-            }
-        });
         console.log("registrationSubmitClicked sendObject", sendObject);
 
         try {
             let response = await axios.post('/insertRegistration', sendObject);
             console.log("insertRegistration response: ", response);
             await context.dispatch('gotoRegistrationApproval');
+            context.rootState.messageType="success";
+            context.rootState.message=response.data.message;
+            return response.status;
         } catch (e) {
-            console.log("registrationSubmitClicked catch error: ", e);
+            console.log("registrationSubmitClicked catch error: ", e.response.data);
+            context.rootState.messageType="error";
+            context.rootState.message=e.response.data.message;
+            return e.response.status;
         } finally {
             context.rootState.spinnerFlag = false;
         }
@@ -354,14 +368,14 @@ export default {
             context.rootState.spinnerFlag = false;
         }
     },
+    gotoContact() {
+        router.push('/contact');
+    },
     gotoEditInfo() {
         router.push('/editInfo');
     },
     gotoHome() {
         router.push('/home');
-    },
-    gotoContact() {
-        router.push('/contact');
     },
     gotoRegistrationApproval() {
         router.push('/registrationApproval');

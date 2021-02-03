@@ -14,7 +14,7 @@
         </template>
         <template #cardImage>
             <v-list-item-avatar tile size="150" color="grey">
-                <v-img :src=getUserImage class="mt-1"/>
+                <v-img :src="getUserImage" class="mt-1"/>
             </v-list-item-avatar>
         </template>
         <template #cardAction>

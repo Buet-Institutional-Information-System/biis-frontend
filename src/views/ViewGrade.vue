@@ -8,7 +8,7 @@
                 No • Grade • Available
             </v-card-title>
             <v-card-actions style="padding-top: 5%">
-                <v-select v-if="getShowFlag" v-model="select" color="black" item-color="teal" :items="getGradeTermList" label="Select Level/Term" outlined rounded required>
+                <v-select v-if="getShowFlag" v-model.trim="select" color="black" item-color="teal" :items="getGradeTermList" label="Select Level/Term" outlined rounded required>
                 </v-select>
             </v-card-actions>
         </template>

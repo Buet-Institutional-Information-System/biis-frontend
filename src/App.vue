@@ -3,21 +3,22 @@
         <Navbar/>
         <v-content>
             <Sidebar v-if="getFlagSignIn && $route.name!=='Admin'"/>
-            <router-view/>
-
-<!--            <router-view v-if="autoLoginChecked"/>-->
+            <router-view v-if="autoLoginChecked"/>
+            <Notification></Notification>
         </v-content>
-
     </v-app>
 </template>
 
 <script>
+import Notification from "@/components/UI/Notification";
 import {mapActions,mapGetters} from 'vuex'
 export default {
     name: 'App',
+    components: {Notification},
     data: function () {
         return {
-            autoLoginChecked: false
+            autoLoginChecked: false,
+
         }
 
     },
@@ -30,11 +31,12 @@ export default {
             console.log("app no token found");
             return;
         }
-        await this.app();
-        this.autoLoginChecked = true;
+
+        this.autoLoginChecked = await this.app();
     },
     methods:{
         ...mapActions('student',['app']),
+
     }
 
 };

@@ -57,13 +57,13 @@
             </Button>
         </template>
         <template #update>
-            <v-text-field v-model="studentId" label="Student Id" color="teal">
+            <v-text-field v-model.trim="studentId" label="Student Id" color="teal">
             </v-text-field>
-            <v-text-field v-model="termId" label="Term Id" color="teal">
+            <v-text-field v-model.trim="termId" label="Term Id" color="teal">
             </v-text-field>
-            <v-text-field v-model="courseId" label="Course Id" color="teal">
+            <v-text-field v-model.trim="courseId" label="Course Id" color="teal">
             </v-text-field>
-            <v-text-field v-model="courseGrade" label="Grade" color="teal">
+            <v-text-field v-model.trim="courseGrade" label="Grade" color="teal">
             </v-text-field>
             <v-card-actions>
                 <Button icon="mdi-update" text="Update Grade" :click="updateGrade">
@@ -74,7 +74,7 @@
             </v-card-actions>
         </template>
         <template #delete>
-            <v-text-field v-model="studentId" label="Student Id" color="teal">
+            <v-text-field v-model.trim="studentId" label="Student Id" color="teal">
             </v-text-field>
             <Button icon="mdi-delete-sweep-outline" text="Delete Student" :click="deleteStudent">
             </Button>
