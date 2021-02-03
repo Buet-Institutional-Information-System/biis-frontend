@@ -177,7 +177,7 @@ export default {
         console.log("logOut clicked");
         context.rootState.spinnerFlag = true;
         let sendObject = {
-            token: context.getters.getToken
+            token: localStorage.getItem('token')
         }
         console.log("logOut sendObject: ", sendObject);
         context.commit('unsetUser');

@@ -1,5 +1,5 @@
 <template>
-        <v-alert text :type="getMessageType" style="position: absolute; right: 1%; top: 1%" v-if="getMessageType!==null">
+        <v-alert text :type="getMessageType" style="position: absolute; right: 0.5%; top: 1%" v-if="getMessageType!==null">
             {{getMessage}}
             <v-btn fab x-small depressed :color="getMessageType" @click="resetNotification">x</v-btn>
         </v-alert>

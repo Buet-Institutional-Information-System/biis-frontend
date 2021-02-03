@@ -14,7 +14,7 @@
         </template>
         <template #cardAction>
             <v-spacer/>
-            <Button icon="mdi-school-outline" text="Show Grade" :click="showGrade" v-if="getShowFlag" style="margin-right: 40%;"></Button>
+            <Button icon="mdi-school-outline" text="Show Grade" :click="showGrade" v-if="getShowFlag" style="margin-right: 40%;" :disabled="select===null"></Button>
         </template>
     </Card>
 </template>

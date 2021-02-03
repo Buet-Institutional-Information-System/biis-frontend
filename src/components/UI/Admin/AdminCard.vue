@@ -54,10 +54,12 @@ export default {
 <style scoped>
 .student{
     width:100%;
-    padding-left:30%
+    padding-left:30%;
+    padding-right:0%;
 }
 .teacher{
     width:100%;
-    padding-right:30%
+    padding-right:30%;
+    padding-left:0%
 }
 </style>

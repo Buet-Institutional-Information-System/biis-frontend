@@ -26,6 +26,7 @@ export default {
       ...mapGetters('student',["getFlagSignIn"])
     },
     async mounted(){
+
         if(localStorage.getItem('token')===null ){
             this.autoLoginChecked = true;
             console.log("app no token found");
@@ -33,9 +34,16 @@ export default {
         }
 
         this.autoLoginChecked = await this.app();
+        if(!this.autoLoginChecked){
+            await this.logOutClicked();
+            this.autoLoginChecked = true;
+            console.log("app token removed found");
+            return;
+        }
+
     },
     methods:{
-        ...mapActions('student',['app']),
+        ...mapActions('student',['app','logOutClicked']),
 
     }
 
