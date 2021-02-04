@@ -288,7 +288,6 @@ export default {
             term_id: context.getters.getUserTerm,
             course_id: [...payload]
         };
-
         console.log("registrationSubmitClicked sendObject", sendObject);
 
         try {

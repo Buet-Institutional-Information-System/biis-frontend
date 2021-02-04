@@ -2,7 +2,7 @@ export default{
     async setNotificationTimer(context){
          setTimeout(()=>{
             context.commit('resetMessage');
-        },2000)
+        },4000)
     },
     resetNotification(context){
        context.commit('resetMessage');

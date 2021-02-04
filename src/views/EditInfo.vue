@@ -33,7 +33,7 @@
                                   v-model.trim="contact_person_name"
                                   @blur="$v.contact_person_name.$touch()"
                                   :error="$v.contact_person_name.$error"
-                                  :error-messages="$v.contact_person_name.$error?'Please enter a valid phone number.':null">
+                                  :error-messages="$v.contact_person_name.$error?'Contact person name is required.':null">
                     </v-text-field>
                 </td>
             </tr>

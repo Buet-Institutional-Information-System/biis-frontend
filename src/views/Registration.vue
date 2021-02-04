@@ -19,7 +19,7 @@
             <tr v-for="item in getCourses" :key="item.id">
                 <td>{{ item.COURSE_ID }}</td>
                 <td>{{ item.COURSE_TITLE }}</td>
-                <td>{{ (parseFloat(item.CREDIT_HOUR)).toFixed(1)  }}</td>
+                <td>{{ (parseFloat(item.CREDIT_HOUR)).toFixed(2)  }}</td>
                 <td>
                     <v-checkbox dense color="teal" v-model.trim="item.select"></v-checkbox>
                 </td>

@@ -26,7 +26,7 @@ export default {
       ...mapGetters('student',["getFlagSignIn"])
     },
     async mounted(){
-
+        // localStorage.removeItem('token');
         if(localStorage.getItem('token')===null ){
             this.autoLoginChecked = true;
             console.log("app no token found");

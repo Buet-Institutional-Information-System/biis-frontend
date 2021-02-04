@@ -21,7 +21,7 @@
                     <tr v-for="item in getCourses" :key="item.id">
                         <td>{{ item.COURSE_ID }}</td>
                         <td>{{ item.COURSE_TITLE }}</td>
-                        <td>{{ (item.CREDIT_HOUR).toFixed(1)  }}</td>
+                        <td>{{ (item.CREDIT_HOUR).toFixed(2)  }}</td>
                         <td>{{ item.OBTAINED_GRADE }}</td>
                         <td>{{ (item.OBTAINED_GRADE_POINT).toFixed(2)  }}</td>
                     </tr>

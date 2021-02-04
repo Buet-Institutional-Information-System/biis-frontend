@@ -13,12 +13,13 @@
     <list default="true" id="fe180557-e1f0-4b26-ab3b-6d11afeebc1c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Admin/AdminCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Admin/AdminCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/Notification.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Notification.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/AdminStudent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/AdminStudent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/AdminTeacher.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/AdminTeacher.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/modules/admin/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/admin/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/modules/student/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/student/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/EditInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/EditInfo.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Registration.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Registration.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/RegistrationApproval.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/RegistrationApproval.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ShowGrade.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ShowGrade.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +43,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -105,7 +107,9 @@
       <workItem from="1612064233693" duration="33481000" />
       <workItem from="1612149966753" duration="38065000" />
       <workItem from="1612239789257" duration="28610000" />
-      <workItem from="1612330228978" duration="21982000" />
+      <workItem from="1612330228978" duration="25532000" />
+      <workItem from="1612372338650" duration="3264000" />
+      <workItem from="1612412116657" duration="1661000" />
     </task>
     <servers />
   </component>
@@ -133,10 +137,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="534" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1611917644727" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1612247856826">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1612372346321">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1612247856826" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1612372346321" />
     <state x="0" y="111" width="1237" height="620" maximized="true" key="dock-window-1" timestamp="1612008774657">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -17,7 +17,7 @@ Vue.use(VueAxios, axios);
 Vue.use(Vuelidate);
 Vue.config.productionTip = false
 axios.defaults.baseURL = 'http://localhost:1148';
-
+// axios.defaults.baseURL = 'https://taahadb.tunnelto.dev';
 
 
 new Vue({
