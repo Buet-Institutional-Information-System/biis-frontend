@@ -4,6 +4,9 @@ import axios from 'axios';
 export default {
     async adviser(context) {
         console.log("adviser clicked");
+        if(context.getters.getAdviserName!=="" && context.getters.getAdviserDept!=="" && context.getters.getAdviserDesignation!=""){
+            return
+        }
         context.rootState.spinnerFlag = true;
         let sendObject = {
             id: context.getters.getAdviserId,
@@ -13,16 +16,16 @@ export default {
         try {
             let response = await axios.get('/adviserInfo', {params: sendObject});
             console.log("adviser response: ");
-            console.log(response.data.rows[0]);
-            if (response.data.rows.length != 0) {
+            console.log(response.data[0]);
+            if (response.data[0].length != 0) {
                 let payload = {
-                    name: response.data.rows[0].INS_NAME,
-                    designation: response.data.rows[0].DESIGNATION,
-                    dept: response.data.rows[0].DEPT
+                    name: response.data[0].ins_name,
+                    designation: response.data[0].designation,
+                    dept: response.data[0].dept
                 }
                 context.commit('setAdviserInfo', payload);
             } else {
-                console.log('adviser: response.data.rows.length=0');
+                console.log('adviser: response.data[0].length=0');
             }
         } catch (e) {
             console.log("adviser catch error: ", e);
@@ -41,20 +44,20 @@ export default {
         try {
              let response = await axios.get('/signIn',{params:sendObject});
              console.log("app response: ",response);
-            if (response.data.rows.length != 0) {
+            if (response.data[0].length != 0) {
                 let payload = {
-                    id: response.data.rows[0].STUDENT_ID,
+                    id: response.data[0].student_id,
                     token:context.getters.getToken,
-                    term_id: response.data.rows[0].TERM_ID,
-                    dept_id: response.data.rows[0].DEPT_ID,
-                    name: response.data.rows[0].STUDENT_NAME,
-                    level: response.data.rows[0].LVL,
-                    term: response.data.rows[0].TRM,
-                    session: response.data.rows[0].SSSN,
-                    hallName: response.data.rows[0].HALL_NAME,
-                    hallStatus: response.data.rows[0].HALL_STATUS,
-                    dept: response.data.rows[0].DEPT_NAME,
-                    adviserId: response.data.rows[0].INS_ID
+                    term_id: response.data[0].term_id,
+                    dept_id: response.data[0].dept_id,
+                    name: response.data[0].student_name,
+                    level: response.data[0].lvl,
+                    term: response.data[0].trm,
+                    session: response.data[0].sssn,
+                    hallName: response.data[0].hall_name,
+                    hallStatus: response.data[0].hall_status,
+                    dept: response.data[0].dept_name,
+                    adviserId: response.data[0].ins_id
                 };
                 context.commit('setUser', payload);
                 return true;
@@ -67,30 +70,31 @@ export default {
     },
     async contact(context) {
         console.log("contact clicked");
+        if(context.state.phone!=="" && context.state.email!=="" && context.state.contact_person_name!=="" && context.state.contact_person_number!=="" && context.state.address!=""){
+            return
+        }
         context.rootState.spinnerFlag = true;
-
-
         let sendObject = {
             token: context.getters.getToken
         };
         console.log("contact sendObject: ", sendObject);
         try {
             let response = await axios.get('/contactInfo', {params: sendObject});
-            console.log("contact response: ", response.data.rows[0]);
+            console.log("contact response: ", response.data[0]);
 
-            if (response.data.rows.length != 0) {
+            if (response.data[0].length != 0) {
                 let payload = {
-                    phone: response.data.rows[0].MOBILE_NUMBER,
-                    email: response.data.rows[0].EMAIL,
-                    contact_person_name: response.data.rows[0].CONTACT_PERSON_NAME,
-                    contact_person_number: response.data.rows[0].CONTACT_PERSON_NUMBER,
-                    address: response.data.rows[0].ADDRESS
+                    phone: response.data[0].mobile_number,
+                    email: response.data[0].email,
+                    contact_person_name: response.data[0].contact_person_name,
+                    contact_person_number: response.data[0].contact_person_number,
+                    address: response.data[0].address
                 };
                 context.commit('unsetUserInfo');
                 context.commit('setUserInfo', payload);
                 //console.log('userinfo in contact phone number: ',context.getters.getPhone);
             } else {
-                console.log('contact: response.data.rows.length=0');
+                console.log('contact: response.data[0].length=0');
             }
         } catch (e) {
             console.log("contact catch error: ", e);
@@ -100,8 +104,10 @@ export default {
     },
     async editConfirmClicked(context, payload) {
         console.log("editConfirm clicked");
+        if(context.state.phone!=="" && context.state.email!=="" && context.state.contact_person_name!=="" && context.state.contact_person_number!=="" && context.state.address!=""){
+            return
+        }
         context.rootState.spinnerFlag = true;
-
         console.log("payload from editInfo: ", payload);
         let sendObject = {
             token: context.getters.getToken,
@@ -133,26 +139,25 @@ export default {
         console.log("signIn clicked");
         context.rootState.spinnerFlag = true;
         console.log("payload from signIn: ",payload);
-
         try {
             let response = await axios.post('/signIn', payload);
-            console.log("signIn response data rows[0]: ");
-            console.log(response.data.rows[0]);
+            console.log("signIn response data: ");
+            console.log(response.data);
             console.log("response data token: ", response.data.token);
-            if (response.data.rows.length != 0) {
+            if (response.data[0].length != 0) {
                 let payload1 = {
-                    id: response.data.rows[0].STUDENT_ID,
+                    id: response.data[0].student_id,
                     token: response.data.token,
-                    term_id: response.data.rows[0].TERM_ID,
-                    dept_id: response.data.rows[0].DEPT_ID,
-                    name: response.data.rows[0].STUDENT_NAME,
-                    level: response.data.rows[0].LVL,
-                    term: response.data.rows[0].TRM,
-                    session: response.data.rows[0].SSSN,
-                    hallName: response.data.rows[0].HALL_NAME,
-                    hallStatus: response.data.rows[0].HALL_STATUS,
-                    dept: response.data.rows[0].DEPT_NAME,
-                    adviserId: response.data.rows[0].INS_ID
+                    term_id: response.data[0].term_id,
+                    dept_id: response.data[0].dept_id,
+                    name: response.data[0].student_name,
+                    level: response.data[0].lvl,
+                    term: response.data[0].trm,
+                    session: response.data[0].sssn,
+                    hallName: response.data[0].hall_name,
+                    hallStatus: response.data[0].hall_status,
+                    dept: response.data[0].dept_name,
+                    adviserId: response.data[0].ins_id
                 };
                 console.log("after signIn payload: ",payload1);
                 context.commit('setUser', payload1);
@@ -217,6 +222,9 @@ export default {
     },
     async registration(context) {
         console.log("registration clicked");
+        if(context.getters.getCourses.length!==0){
+            return
+        }
         context.rootState.spinnerFlag = true;
         let sendObject = {
             token: context.getters.getToken,
@@ -227,14 +235,21 @@ export default {
         try {
             let response = await axios.get('/registration', {params: sendObject});
             console.log("registration response: ", response.data);
-            if (response.data.registration && response.data.rows.length !== 0) {
+            if (response.data.registration && response.data.length !== 0) {
                 context.commit('setTotalCreditHours', {total_credit_hours: response.data.total_credit_hour});
                 console.log("registration total_credit_hours from store: ", context.getters.getTotalCreditHours);
-                response.data.rows.forEach(row => row['select'] = false);
-                context.commit('setCourses', response.data.rows);
+                let courses=[];
+                for(let i in response.data){
+                    if(typeof response.data[i] === 'object'){
+                        response.data[i].select=false;
+                        courses.push(response.data[i]);
+                    }
+                }
+                console.log(response.data);
+                context.commit('setCourses', courses);
                 console.log("registration courses from store: ", context.getters.getCourses);
             } else if (!response.data.registration) {
-                //console.log("registration redirect to registrationApproval");
+                console.log("registration redirect to registrationApproval");
                 await context.dispatch('gotoRegistrationApproval');
             } else {
                 console.log('registration else block');
@@ -247,6 +262,9 @@ export default {
     },
     async registrationApproval(context) {
         console.log("registrationApproval clicked");
+        if(context.getters.getCourses.length!==0){
+            return
+        }
         context.rootState.spinnerFlag = true;
         let sendObject = {
             token: context.getters.getToken,
@@ -266,8 +284,16 @@ export default {
             if (response.data.credit_hours_earned === null) {
                 context.commit('setCreditHoursEarnedUptoThisTerm', {credit_hours_earned_upto_this_term: 0})
             }
-            if (response.data.rows.length !== 0) {
-                context.commit('setCourses', response.data.rows);
+            if (response.data.length !== 0) {
+                let courses=[];
+                for(let i in response.data){
+                    if(typeof response.data[i] === 'object' && response.data[i]!==null){
+                        courses.push(response.data[i]);
+                    }
+                }
+                console.log("registrationApproval courses: ",courses);
+                context.commit('setCourses',courses);
+                console.log("registration courses from store: ", context.getters.getCourses);
             } else {
                 console.log('registrationApproval else block');
             }
@@ -281,6 +307,7 @@ export default {
     },
     async registrationSubmitClicked(context, payload) {
         console.log("registrationSubmit clicked ");
+        context.commit('setCourses',[]);
         context.rootState.spinnerFlag = true;
         console.log("payload from registration: ", payload);
         let sendObject = {
@@ -327,11 +354,17 @@ export default {
             context.commit('setCGPA', {cgpa:response.data.cgpa});
             console.log('showGrade gpa from store: ',context.getters.getGPA);
             console.log('showGrade cgpa from store: ',context.getters.getCGPA);
-            if (response.data.rows.length != 0) {
+            if (response.data.length != 0) {
                 let courses = [];
                 console.log('response data row length is not zero');
-                response.data.rows.forEach(row => courses.push(row));
+                for(let i in response.data){
+                    if(typeof response.data[i] === 'object'){
+                        courses.push(response.data[i])
+                    }
+                }
+                console.log("showGrade courses: ",courses);
                 context.commit('setCourses', courses);
+                console.log(context.getters.getCourses);
             } else {
                 console.log('showGrade else block');
             }
@@ -351,11 +384,15 @@ export default {
         console.log("viewGrade sendObject: ", sendObject);
         try {
             let response = await axios.get('/viewGrade', {params: sendObject});
-            console.log("viewGrade response data rows[0]: ", response.data.rows[0]);
+            console.log("viewGrade response data: ", response.data);
 
-            if (response.data.rows.length != 0) {
+            if (response.data.length != 0) {
                 let terms = [];
-                response.data.rows.forEach(row => terms.push('20' + row.slice(0, 3) + '20' + row.slice(3,)));
+                for(let i in response.data){
+                    if(i!=='message'){
+                        terms.push('20' + response.data[i].slice(0, 3) + '20' + response.data[i].slice(3,))
+                    }
+                }
                 console.log('viewGrade terms: ', terms);
                 context.commit('setGradeTermList', terms);
             } else {

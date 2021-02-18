@@ -1,5 +1,5 @@
 <template>
-    <RegistrationCard>
+    <RegistrationCard v-if="getCourses">
         <template #intro>
             <div>REGISTERED COURSES</div>
             <div>level {{ getCurrentLevel }} Term {{ getCurrentTerm }} Session
@@ -19,9 +19,9 @@
             </thead>
             <tbody>
             <tr v-for="item in getCourses" :key="item.id">
-                <td>{{ item.COURSE_ID }}</td>
-                <td>{{ item.COURSE_TITLE }}</td>
-                <td>{{ (parseFloat(item.CREDIT_HOUR)).toFixed(2) }}</td>
+                <td>{{ item.course_id }}</td>
+                <td>{{ item.course_title}}</td>
+                <td>{{ (parseFloat(item.credit_hour)).toFixed(2) }}</td>
             </tr>
             </tbody>
         </template>
@@ -48,9 +48,6 @@ export default {
     data: function () {
         return {
             headers: ["COURSE_ID", "TITLE", "CREDIT_HOUR"],
-            course: [],
-            credit_hours_upto_this_term: "",
-            registered_credit_hours_this_term: ""
         }
     },
     computed:{

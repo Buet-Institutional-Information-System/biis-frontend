@@ -19,11 +19,11 @@
                     </thead>
                     <tbody>
                     <tr v-for="item in getCourses" :key="item.id">
-                        <td>{{ item.COURSE_ID }}</td>
-                        <td>{{ item.COURSE_TITLE }}</td>
-                        <td>{{ (item.CREDIT_HOUR).toFixed(2)  }}</td>
-                        <td>{{ item.OBTAINED_GRADE }}</td>
-                        <td>{{ (item.OBTAINED_GRADE_POINT).toFixed(2)  }}</td>
+                        <td>{{ item.course_id }}</td>
+                        <td>{{ item.course_title}}</td>
+                        <td>{{ (item.credit_hour).toFixed(2)  }}</td>
+                        <td>{{ item.obtained_grade }}</td>
+                        <td>{{ (item.obtained_grade_point).toFixed(2)  }}</td>
                     </tr>
                     </tbody>
                 </template>

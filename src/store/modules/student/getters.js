@@ -49,11 +49,13 @@ export default {
         return state.adviserDept;
     },
     getUserImage: state => {
-        return axios.defaults.baseURL + '/student/' + state.userId + '.jpg';
+        return 'https://firebasestorage.googleapis.com/v0/b/mt-biis.appspot.com/o/student%2F'+state.userId+'.jpg?alt=media';
+        //return axios.defaults.baseURL + '/student/' + state.userId + '.jpg';
         //return 'http://localhost:1148/student/'+state.userId+'.jpg';
     },
     getAdviserImage: state => {
-        return axios.defaults.baseURL + '/adviser/' + state.adviserId + '.jpg';
+        return 'https://firebasestorage.googleapis.com/v0/b/mt-biis.appspot.com/o/adviser%2F'+state.adviserId+'.jpg?alt=media';
+        //return axios.defaults.baseURL + '/adviser/' + state.adviserId + '.jpg';
         //return 'http://localhost:1148/adviser/'+state.adviserId+'.jpg';
     },
     getContacts: state => {

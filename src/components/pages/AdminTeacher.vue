@@ -134,7 +134,7 @@ export default {
                 name: this.insName,
                 dept: this.insDept,
                 designation: this.insDesignation,
-                adviserImage: (this.adviserImage ? this.adviserImage[0]: null)
+                image: (this.adviserImage ? this.adviserImage[0]: null)
             }
             let response=await this.adminInsertTeacher(sendObject);
             if (response === 'clear') {

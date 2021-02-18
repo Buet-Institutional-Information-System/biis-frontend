@@ -1,5 +1,5 @@
 <template>
-    <RegistrationCard>
+    <RegistrationCard v-if="getCourses">
         <template #intro>
             <div>OFFERED COURSES</div>
             <div>level {{ getCurrentLevel }} Term {{getCurrentTerm }} Session
@@ -17,9 +17,9 @@
             </thead>
             <tbody>
             <tr v-for="item in getCourses" :key="item.id">
-                <td>{{ item.COURSE_ID }}</td>
-                <td>{{ item.COURSE_TITLE }}</td>
-                <td>{{ (parseFloat(item.CREDIT_HOUR)).toFixed(2)  }}</td>
+                <td>{{ item.course_id }}</td>
+                <td>{{ item.course_title }}</td>
+                <td>{{ (parseFloat(item.credit_hour)).toFixed(2)  }}</td>
                 <td>
                     <v-checkbox dense color="teal" v-model.trim="item.select"></v-checkbox>
                 </td>
@@ -59,7 +59,7 @@ export default {
             this.course_id=[];
             this.getCourses.forEach(c => {
                 if (c['select'] === true) {
-                    this.course_id.push(c['COURSE_ID']);
+                    this.course_id.push(c['course_id']);
                 }
             });
             return this.course_id.length

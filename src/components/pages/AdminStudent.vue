@@ -99,11 +99,12 @@
                           :error="$v.courseId.$error"
                           :error-messages="$v.courseId.$error?'required':null">
             </v-text-field>
-            <v-text-field v-model.trim="courseGrade" label="Grade" color="teal"
-                          @blur="$v.courseGrade.$touch()"
-                          :error="$v.courseGrade.$error"
-                          :error-messages="$v.courseGrade.$error?'required':null">
-            </v-text-field>
+            <v-select v-model.trim="courseGrade" :items="[4,3.75,3.5,3.25,3,2.75,2.5,2.25,2,0]" label="Grade"
+                      color="teal"
+                      @blur="$v.courseGrade.$touch()"
+                      :error="$v.courseGrade.$error"
+                      :error-messages="$v.courseGrade.$error?'required':null">
+            </v-select>
             <v-card-actions>
                 <Button icon="mdi-update" text="Update Grade" :click="updateGrade" :disabled="getSpinnerFlag">
                 </Button>
@@ -214,7 +215,7 @@ export default {
                 hall: this.hall,
                 hallStatus: this.hallStatus,
                 password: this.password,
-                studentImage: (this.studentImage ? this.studentImage[0]: null)
+                image: (this.studentImage ? this.studentImage[0]: null)
             }
             console.log("inside insert student before api call")
             let response = await this.adminInsertStudent(sendObject);

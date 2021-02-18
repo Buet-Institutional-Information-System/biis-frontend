@@ -11,12 +11,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe180557-e1f0-4b26-ab3b-6d11afeebc1c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main-3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.firebase/hosting.ZGlzdA.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.firebase/hosting.ZGlzdA.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/app.e48da48c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/app.e48da48c.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-vendors.61e261ab.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-vendors.61e261ab.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pages/AdminStudent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/AdminStudent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pages/AdminTeacher.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/AdminTeacher.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/modules/admin/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/admin/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/modules/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/admin/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/modules/student/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/student/actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/EditInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/EditInfo.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/modules/student/getters.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/student/getters.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/Registration.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Registration.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/RegistrationApproval.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/RegistrationApproval.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/ShowGrade.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ShowGrade.vue" afterDir="false" />
@@ -29,8 +42,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -46,7 +59,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../tutorial/NodeTutorial/ NodeJS - Maximilian/10. SQL Introduction/12.1 04-fetching-a-single-product.zip/04-fetching-a-single-product" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -109,7 +122,19 @@
       <workItem from="1612239789257" duration="28610000" />
       <workItem from="1612330228978" duration="25532000" />
       <workItem from="1612372338650" duration="3264000" />
-      <workItem from="1612412116657" duration="1661000" />
+      <workItem from="1612412116657" duration="2328000" />
+      <workItem from="1612431828633" duration="400000" />
+      <workItem from="1612447224530" duration="11000" />
+      <workItem from="1612871992030" duration="1662000" />
+      <workItem from="1612957521027" duration="4963000" />
+      <workItem from="1613013440785" duration="1911000" />
+      <workItem from="1613137162609" duration="1676000" />
+      <workItem from="1613150335224" duration="9000" />
+      <workItem from="1613190514311" duration="1347000" />
+      <workItem from="1613275367542" duration="1565000" />
+      <workItem from="1613453328862" duration="2497000" />
+      <workItem from="1613535864047" duration="17175000" />
+      <workItem from="1613621478833" duration="13127000" />
     </task>
     <servers />
   </component>
@@ -137,10 +162,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="534" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1611917644727" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1612372346321">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1613535943008">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1612372346321" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1613535943008" />
     <state x="0" y="111" width="1237" height="620" maximized="true" key="dock-window-1" timestamp="1612008774657">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -153,5 +178,16 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1612076764839" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/store/modules/student/getters.js</url>
+          <line>63</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
